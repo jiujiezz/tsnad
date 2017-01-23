@@ -1,21 +1,20 @@
-# SMD
+# TSNAD
     Detecting somatic mutations and predicting tumor-specific neo-antigens
 
     ******************** Software Information ***********************************
-    Version: Somatic_Mutation_Detector 2.0
-    File: antigen_predicting_pipeline.py
+    Version: Tumor_Specific_NeoAntigen_Detector 2.0
     Python Version: 2.7.11
     Finish time: April, 2016.
     Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-    Copyright (C) 2015-2016 - College of Pharmaceutical Sciences, 
+    Copyright (C) 2015-2017 - College of Pharmaceutical Sciences, 
                Zhejiang University - All Rights Reserved 
 *****************************************************************************
-# How to run SMD
-    (1) After unzipping the software, enter into SMD folder and give execution 
-       rights to SMD.
+# How to run TSNAD
+    (1) After unzipping the software, enter into TSNAD folder and give execution 
+       rights to TSNAD.
        Commands:
-             cd [SMD_path]
-             chmod +x Somatic
+             cd [TSNAD_path]
+             chmod +x TSNAD
     (2) If loading shared libraries errors occurs, please let your system find 
        the external dynamic link libraries located in dependencies folder. 
        You can add dependencies path (~/SMD/dependencies/) in the last of 
