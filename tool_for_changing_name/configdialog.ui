@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>configDialog</class>
+ <widget class="QWidget" name="configDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>554</width>
+    <height>222</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>1</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Samples Configuration Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab1">
+      <attribute name="title">
+       <string>Normal Samples</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>510</width>
+           <height>51</height>
+          </size>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QLineEdit" name="lineEdit1">
+          <property name="geometry">
+           <rect>
+            <x>104</x>
+            <y>11</y>
+            <width>61</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label1">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>12</y>
+            <width>88</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Lane Number</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton1">
+          <property name="geometry">
+           <rect>
+            <x>370</x>
+            <y>10</y>
+            <width>51</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Confirm</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton2">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>10</y>
+            <width>51</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit2">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>11</y>
+            <width>61</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label2">
+          <property name="geometry">
+           <rect>
+            <x>191</x>
+            <y>12</y>
+            <width>83</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Part Number</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout1" rowstretch="0">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab2">
+      <attribute name="title">
+       <string>Tumor Samples</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>510</width>
+           <height>51</height>
+          </size>
+         </property>
+         <property name="title">
+          <string/>
+         </property>
+         <widget class="QLineEdit" name="lineEdit3">
+          <property name="geometry">
+           <rect>
+            <x>104</x>
+            <y>11</y>
+            <width>61</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>12</y>
+            <width>88</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Lane Number</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton3">
+          <property name="geometry">
+           <rect>
+            <x>370</x>
+            <y>10</y>
+            <width>51</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Confirm</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton4">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>10</y>
+            <width>51</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit4">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>11</y>
+            <width>61</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label4">
+          <property name="geometry">
+           <rect>
+            <x>191</x>
+            <y>12</y>
+            <width>83</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Part Number</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="gridLayout2" rowstretch="0">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton5">
+       <property name="text">
+        <string>Modify</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
