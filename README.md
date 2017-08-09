@@ -8,7 +8,8 @@
     Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
     Copyright (C) 2015-2017 - College of Pharmaceutical Sciences, 
                Zhejiang University - All Rights Reserved 
-    Cite: Zhou Z, Lyu X, Wu J, Yang X, Wu S, Zhou J, Gu X, Su Z, Chen S. TSNAD: an integrated software for cancer somatic mutation and tumor-specific neoantigen detection. R Soc Open Sci. 2017, 4: 170050.
+    Cite: Zhou Z, Lyu X, Wu J, Yang X, Wu S, Zhou J, Gu X, Su Z, Chen S. TSNAD: an integrated software 
+for cancer somatic mutation and tumor-specific neoantigen detection. R Soc Open Sci. 2017, 4: 170050.
 *****************************************************************************
 # How to run TSNAD
     (1) After unzipping the software, enter into TSNAD folder and give execution 
