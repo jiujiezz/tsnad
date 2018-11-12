@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
-# Version: Somatic_Mutation_Detector 2.0
+# Version: TSNAD v1.1
 # File: antigen_predicting_pipeline.py
 # Python Version: 2.7.11
-# Finish time: January, 2016.
+# Finish time: November, 2018.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-# Copyright (C) 2015-2016 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2018-2019 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 import datetime
@@ -38,8 +38,6 @@ print "B1: %s"%hash_table['B1']
 print "B2: %s"%hash_table['B2']
 print "C1: %s"%hash_table['C1']
 print "C2: %s"%hash_table['C2']
-print "weak_binding: %s"%hash_table['weak_binding']
-print "strong_binding: %s"%hash_table['strong_binding']
 print "peptide_length: %s"%hash_table['peptide_length']
 print "***********************************************************************************************************************************************\n"
 
@@ -53,10 +51,9 @@ B1 = hash_table['B1']
 B2 = hash_table['B2']
 C1 = hash_table['C1']
 C2 = hash_table['C2']
-weak_binding = hash_table['weak_binding']
-strong_binding = hash_table['strong_binding']
 peptide_length = hash_table['peptide_length']
-
+if not os.path.exists(outputs_folder): 
+    os.mkdir(outputs_folder)
 # -----------------------Main function-------------------------
 print "Starting the main function for antigen predicting..."
 start_time = datetime.datetime.now();
@@ -69,36 +66,31 @@ print "\n"
 print "*************************************************************************************************************************************************"
 print "*** Beginning the antigen predicting...\n"
 
-output_membrane_protein_mutations = outputs_folder + 'membrane_protein_mutations.txt';
-output_amino_acid_property = outputs_folder + 'amino_acid_property_changed.txt';
 output_21aa_peptides = outputs_folder + '21aa_peptides.txt';
 
 output_netMHCpan_xls = outputs_folder + 'netMHCpan_output.xls';
 output_netMHCpan = outputs_folder + 'netMHCpan_output.txt';
 
-output_binding_info = outputs_folder + 'binding_info.txt';
-output_specific_binding_info = outputs_folder + 'specific_binding_info.txt';
-output_binding_mutations = outputs_folder + 'mutations_with_MHC_binding.txt';
-output_specific_binding_mutations = outputs_folder + 'mutations_with_specific_MHC_binding.txt';
+output_neoantigen = outputs_folder + 'predicted_neoantigen.txt';
 
 current_path = sys.path[0];
 work_path = current_path + '/sub/'; # enter the sub folder
 
 print "Begining protein mutation filtering..."
 print "Processing file: %s"%input_file,"\n"
-command1 = 'perl ' + work_path + 'protein_mutation_filter.pl ' + input_file + ' ' + output_membrane_protein_mutations + ' ' + output_amino_acid_property + ' ' + output_21aa_peptides + ' ' + work_path + 'tmhmm_membrane_proteins.txt ' + work_path + 'aminoacid.txt ' + work_path + 'protein_sequences_b37.fa';
+command1 = 'perl ' + work_path + 'protein_mutation_filter.pl ' + input_file + ' ' + output_21aa_peptides + ' ' + work_path + 'protein_sequences_b37.fa';
 os.system(command1);
 print "Protein mutation filtering done.\n\n"
 
 print "Begining netMHCpan..."
 print "Processing file: %s"%output_21aa_peptides,"\n"
-command2 = netMHCpan_folder + 'netMHCpan -a HLA-A' + A1 + ',HLA-A' + A2 + ',HLA-B' + B1 + ',HLA-B' + B2 + ',HLA-C' + C1 + ',HLA-C' + C2 + ' -f ' + output_21aa_peptides + ' -s 1 -th ' + strong_binding + ' -lt ' + weak_binding + ' -l ' + peptide_length + ' -xls 1 -xlsfile ' + output_netMHCpan_xls + ' > ' + output_netMHCpan;
+command2 = netMHCpan_folder + 'netMHCpan -a HLA-A' + A1 + ',HLA-A' + A2 + ',HLA-B' + B1 + ',HLA-B' + B2 + ',HLA-C' + C1 + ',HLA-C' + C2 + ' -f ' + output_21aa_peptides + ' -s 1 -BA 1 -rth 0.5 -rlt 2.0'  + ' -l ' + peptide_length + ' -xls 1 -xlsfile ' + output_netMHCpan_xls + ' > ' + output_netMHCpan;
 os.system(command2);
 print "netMHCpan done.\n\n"
 
 print "Begining netMHCpan results filtering..."
 print "Processing file: %s"%input_file,"\n"
-command3 = 'perl ' + work_path + 'netMHCpan_filter.pl' + ' ' + input_file + ' ' + output_netMHCpan + ' ' + output_binding_info + ' ' + output_specific_binding_info + ' ' + output_binding_mutations + ' ' + output_specific_binding_mutations;
+command3 = 'perl ' + work_path + 'netMHCpan_filter.pl' + ' ' + output_netMHCpan + ' ' + output_neoantigen;
 os.system(command3); 
 print "netMHCpan results filtering done.\n\n"
 

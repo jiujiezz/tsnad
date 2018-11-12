@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
-# Version: Somatic_Mutation_Detector 2.0
+# Version: TSNAD v1.1
 # File: somatic_mutation_senquencing_pipeline.py
 # Python Version: 2.7.11
-# Finish time: January, 2016.
+# Finish time: December, 2018.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-# Copyright (C) 2015-2016 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2018-2019 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 import datetime
@@ -33,20 +33,18 @@ print "***************************************************************** Paramet
 print "System parameters are:"
 print "inputs_folder: %s"%hash_table['inputs_folder']
 print "outputs_folder: %s"%hash_table['outputs_folder']
-print "trimmomatic_folder: %s"%hash_table['trimmomatic_folder']
+print "trimmomatic_tool: %s"%hash_table['trimmomatic_tool']
 print "bwa_folder:",hash_table['bwa_folder']
 print "samtools_folder: %s"%hash_table['samtools_folder']
-print "gatk_folder: %s"%hash_table['gatk_folder']
-print "picardtools_folder: %s"%hash_table['picardtools_folder']
-print "annovar_folder: %s"%hash_table['annovar_folder']
+print "gatk_tool: %s"%hash_table['gatk_tool']
+print "picardtools_tool: %s"%hash_table['picardtools_tool']
 print "soaphla_folder: %s"%hash_table['soaphla_folder']
 
 print "\nProject parameters are:"
-print "ref_human_folder: %s"%hash_table['ref_human_folder']
-print "ref_1000G_folder: %s"%hash_table['ref_1000G_folder']
-print "ref_Mills_folder: %s"%hash_table['ref_Mills_folder']
-print "ref_dbsnp_folder: %s"%hash_table['ref_dbsnp_folder']
-print "annovarDB_folder: %s"%hash_table['annovarDB_folder']
+print "ref_human_file: %s"%hash_table['ref_human_file']
+print "ref_1000G_file: %s"%hash_table['ref_1000G_file']
+print "ref_Mills_file: %s"%hash_table['ref_Mills_file']
+print "ref_dbsnp_file: %s"%hash_table['ref_dbsnp_file']
 print "typeNum: %s"%hash_table['typeNum']
 print "laneNum: %s"%hash_table['laneNum']
 print "partNum: %s"%hash_table['partNum']
@@ -67,14 +65,15 @@ print "*************************************************************************
 # Parameter preprocessing
 inputs_folder = hash_table['inputs_folder']
 outputs_folder = hash_table['outputs_folder']
-trimmomatic_folder = hash_table['trimmomatic_folder']
+RNA_seq_folder = hash_table['RNA_seq_folder']
+trimmomatic_tool = hash_table['trimmomatic_tool']
 bwa_folder = hash_table['bwa_folder']
 samtools_folder = hash_table['samtools_folder']
-gatk_folder = hash_table['gatk_folder']
-picardtools_folder = hash_table['picardtools_folder']
-annovar_folder = hash_table['annovar_folder']
+gatk_tool = hash_table['gatk_tool']
+hisat2_folder = hash_table['hisat2_folder']
+stringtie_tool = hash_table['stringtie_tool']
+VEP_folder = hash_table['VEP_folder']
 soaphla_folder = hash_table['soaphla_folder']
-annovarDB_folder = hash_table['annovarDB_folder']
 
 leading = hash_table['leading']
 trailing = hash_table['trailing']
@@ -99,10 +98,10 @@ normal_f = hash_table['normal_f']
 tumor_alt = hash_table['tumor_alt']
 
 ref_folder = [];
-ref_folder.append(hash_table['ref_human_folder']);
-ref_folder.append(hash_table['ref_1000G_folder']);
-ref_folder.append(hash_table['ref_Mills_folder']);
-ref_folder.append(hash_table['ref_dbsnp_folder']);
+ref_folder.append(hash_table['ref_human_file']);
+ref_folder.append(hash_table['ref_1000G_file']);
+ref_folder.append(hash_table['ref_Mills_file']);
+ref_folder.append(hash_table['ref_dbsnp_file']);
 
 
 # -----------------------Main function-------------------------
@@ -112,7 +111,7 @@ print "Starting time is: %s\n"%start_time
 
 # Reading the folder where project locates
 print "All results will be stored in folder %s"%outputs_folder;
-folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","annovar_results","soaphla_results"]; 
+folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","soaphla_results","hisat2_results"]; 
 
 # define all the folder names we may use
 for s in folder_name:
@@ -123,43 +122,51 @@ for s in folder_name:
     else:
         os.mkdir(new_path); # generate the folders of intermediate results
 
-fileList = subfunction.getFileList(inputs_folder,"fastq");
+fileList = subfunction.getFileList(inputs_folder,"fastq.gz");
+
 # Starting the tools
 print "\n\n"
 print "*************************************************************************************************************************************"
 print "*** Beginning the 1st procedure: fastq file pre-processing...\n"
-outputCleanedFile = subfunction.runTrimmomatic(trimmomatic_folder,outputs_folder,fileList,leading,trailing,headcrop,slidingwindow,minlen,typeNum,laneNum,partNum,threadNum); # inputFileFolder means the folder of input Files in next processing step 
+outputCleanedFile = subfunction.runTrimmomatic(trimmomatic_tool,outputs_folder,fileList,leading,trailing,headcrop,slidingwindow,minlen,typeNum,laneNum,partNum,threadNum);
+# inputFileFolder means the folder of input Files in next processing step 
 print "So far the 1st procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
 print "*** Beginning the 2nd procedure: BWA mapping to genome reference sequence...\n"
-outputSamFiles = subfunction.runBWA(bwa_folder,gatk_folder,ref_folder,outputs_folder,outputCleanedFile,typeNum,laneNum,partNum,threadNum);
+outputSamFiles = subfunction.runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,outputCleanedFile,typeNum,laneNum,partNum,threadNum);
 print "So far the 2nd procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
 print "*** Beginning the 3rd procedure: Samtools to rearrange the sequence...\n"
-outputIndFiles = subfunction.runSAM(samtools_folder,picardtools_folder,outputs_folder,outputSamFiles,typeNum,laneNum,threadNum);
+outputIndFiles = subfunction.runSAM(samtools_folder,picardtools_tool,outputs_folder,outputSamFiles,typeNum,laneNum,threadNum);
 print "So far the 3rd procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
 print "*** Beginning the 4th procedure: GATK local realignment around indels...\n"
-outputRecalBamFiles = subfunction.runGATK(gatk_folder,ref_folder,outputs_folder,outputIndFiles,typeNum,needRevisedData);
+outputRecalBamFiles = subfunction.runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,outputIndFiles,typeNum,needRevisedData);
 print "So far the 4th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
 print "*** Beginning the 5th procedure: MuTect to detect somatic mutation...\n"
-outputMutectVcfFiles = subfunction.runMUTECT2(gatk_folder,ref_folder,outputs_folder,outputRecalBamFiles,typeNum);
+outputMutectVcfFiles = subfunction.runMUTECT2(gatk_tool,ref_folder,outputs_folder,outputRecalBamFiles,typeNum,tumor_reads,normal_reads,tumor_f,normal_f,tumor_alt);
 print "So far the 5th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
-print "*** Beginning the 6th procedure: Annovar function annotation...\n"
-subfunction.runANN(annovar_folder,annovarDB_folder,outputs_folder,outputMutectVcfFiles,tumor_reads,normal_reads,tumor_f,normal_f,tumor_alt);
+print "*** Beginning the 6th procedure: VEP annotation...\n"
+subfunction.runVEP(VEP_folder,outputs_folder,outputMutectVcfFiles);
 print "So far the 6th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
-print "*** Beginning the 7th procedure: HLA parting...\n"
-subfunction.runHLA(soaphla_folder,outputs_folder,outputRecalBamFiles,typeNum);
+print "*** Beginning the 7th procedure: HLA typing...\n"
+subfunction.runHLA(soaphla_folder,outputs_folder,outputSamFiles,typeNum);
 print "So far the 7th procedure done.\n\n"
+
+if RNA_seq_folder:
+    print "*************************************************************************************************************************************"
+    print "*** Beginning the 8th procedure: RNA-seq analysis...\n"
+    subfunction.runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,outputs_folder);
+    print "So far the 8th procedure done.\n\n"
 
 # Presenting the final results
 finish_time = datetime.datetime.now();
