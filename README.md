@@ -14,20 +14,20 @@ An integrated software for cancer somatic mutation and tumour-specific neoantige
 ## Requirements
 TSNAD uses the following software and libraries:  
   	
-1. [Trimmomatic](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.38.zip)  
-2. [bwa](https://sourceforge.net/projects/bio-bwa/files/bwa-0.7.17.tar.bz2/download)  
-3. [samtools](https://sourceforge.net/projects/samtools/files/latest/download)     
+1. Trimmomatic  (In Tools/)  
+2. bwa  (In Tools/)  
+3. samtools  (In Tools/)     
 4. [GATK](https://github.com/broadinstitute/gatk/releases/download/4.0.11.0/gatk-4.0.11.0.zip)   
 5. [VEP](https://github.com/Ensembl/ensembl-vep/archive/release/94.zip)   
 6. [hisat2](http://ccb.jhu.edu/software/hisat2/dl/hisat2-2.1.0-Linux_x86_64.zip)   
-7. [stringtie](http://ccb.jhu.edu/software/stringtie/dl/stringtie-1.3.5.Linux_x86_64.tar.gz)
+7. stringtie  (In Tools/)
 8. SOAP-HLA  (In Tools/)
 9. NetMHCpan4.0  (In Tools/)
 10. JAVA     
 11. Python    
 12. Perl   
   
-1-7 tools are better put in the folder Tools/.   
+1-9 tools are better put in the folder Tools/.   
 
 ## Installation of each module
 1. Trimmomatic   
