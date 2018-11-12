@@ -122,8 +122,11 @@ TSNAD uses the following software and libraries:
  	change the *full path* and *tmpdir path* in your own path.
 
 
-## Usage 
+## Usage  
+
 1. configure the file *somatic_mutation_sequencing_parameters.config* ,replace the folder path in your own.  
+
+RNA-seq data should end with 'fastq.gz'.
 
 The *RNA_seq_folder* must be empty if you don't have RNA-seq data.  
 
@@ -187,7 +190,7 @@ then
 
 ### V1.0 
 1. GUI for neoantigen prediction  
-2. Two parts: one for somatic mutation detection, another for HLA-peptide prediction.
+2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
 
 ### V1.1
 1. Trimmomatic v0.35 -> v0.38  
