@@ -126,7 +126,7 @@ TSNAD uses the following software and libraries:
 
 1. configure the file *somatic_mutation_sequencing_parameters.config* ,replace the folder path in your own.  
 
-RNA-seq data should end with 'fastq.gz'.
+All the input data should end with 'fastq.gz'.
 
 The *RNA_seq_folder* must be empty if you don't have RNA-seq data.  
 
