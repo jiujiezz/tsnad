@@ -266,18 +266,22 @@ def runHLA(soaphla_folder,outputs_folder,inputFiles,typeNum):
 
 # RNA-seq analysis 
 def runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,outputs_folder):
+    current_path = sys.path[0];
     inputFile = getFileList(RNA_seq_folder,'fastq.gz')
     p,f = os.path.split(inputFile[0]);
     file_name = f.split("_")[0];
     command1 = hisat2_folder + 'hisat2 -p 8 --dta -x ' + hisat2_folder + 'grch37/genome -1 ' + inputFile[0] + ' -2 ' + inputFile[1] + ' -S ' +  outputs_folder + 'hisat2_results/' + file_name + '.sam'
     command2 = samtools_folder + 'samtools sort -@ 8 -o ' + outputs_folder + 'hisat2_results/' + file_name + '.bam ' + outputs_folder + 'hisat2_results/' + file_name + '.sam'
     command3 = samtools_folder + 'samtools index ' + outputs_folder + 'hisat2_results/' + file_name + '.bam'
-    command4 = stringtie_tool + ' -p 8 -G ' + hisat2_folder + 'Homo_sapiens.GRCh37.87.gtf -A ' + file_name + '.gtf -l ' + file_name + ' ' +  outputs_folder + 'hisat2_results/' +  file_name + '.bam'
+    command4 = stringtie_tool + ' -p 8 -G ' + hisat2_folder + 'Homo_sapiens.GRCh37.87.gtf -A ' + outputs_folder + 'hisat2_results/' + file_name + '.gtf -l ' + file_name + ' ' +  outputs_folder + 'hisat2_results/' +  file_name + '.bam'
+    command5 = 'perl ' + current_path + '/sub/expression_filter.pl ' + outputs_folder + 'vep_results/mutect_call_adj_vep_filtered.txt ' + outputs_folder + 'hisat2_results/' + file_name + '.gtf ' + outputs_folder + 'vep_results/mutect_call_adj_vep_filtered_with_expression.txt';
     print command1
     print command2
     print command3
     print command4
+    print command5
     os.system(command1)
     os.system(command2)
     os.system(command3)
     os.system(command4)
+    os.system(command5)
