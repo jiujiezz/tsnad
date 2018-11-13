@@ -37,7 +37,6 @@ print "trimmomatic_tool: %s"%hash_table['trimmomatic_tool']
 print "bwa_folder:",hash_table['bwa_folder']
 print "samtools_folder: %s"%hash_table['samtools_folder']
 print "gatk_tool: %s"%hash_table['gatk_tool']
-print "picardtools_tool: %s"%hash_table['picardtools_tool']
 print "soaphla_folder: %s"%hash_table['soaphla_folder']
 
 print "\nProject parameters are:"
@@ -109,6 +108,11 @@ print "Starting the main function..."
 start_time = datetime.datetime.now();
 print "Starting time is: %s\n"%start_time
 
+if os.path.exists(outputs_folder): # if the folder has existed, do nothing
+    print " Notes: %s has already existed"%outputs_folder;
+else:
+    os.mkdir(outputs_folder);
+    
 # Reading the folder where project locates
 print "All results will be stored in folder %s"%outputs_folder;
 folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","soaphla_results","hisat2_results"]; 
