@@ -5,7 +5,7 @@
 # Python Version: 2.7.11
 # Finish time: November, 2018.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-# Copyright (C) 2018-2019 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2016-2018 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 import datetime
