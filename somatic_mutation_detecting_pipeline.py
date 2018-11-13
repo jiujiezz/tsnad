@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
 # Version: TSNAD v1.1
-# File: somatic_mutation_senquencing_pipeline.py
+# File: somatic_mutation_detecting_pipeline.py
 # Python Version: 2.7.11
 # Finish time: December, 2018.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
