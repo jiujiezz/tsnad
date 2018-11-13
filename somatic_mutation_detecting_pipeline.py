@@ -3,9 +3,9 @@
 # Version: TSNAD v1.1
 # File: somatic_mutation_detecting_pipeline.py
 # Python Version: 2.7.11
-# Finish time: December, 2018.
+# Finish time: November, 2018.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-# Copyright (C) 2018-2019 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2016-2018 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 import datetime
@@ -17,7 +17,7 @@ import subfunction
 print "\nStep up the sequencing program"
 print "This pipeline takes original sequence data (fastq format) as input, calls standrad data processing software (trimmomatic,BWA,etc), and eventually outputs annotated variants\n"
 print "Reading the configure file..."
-f = open("somatic_mutation_sequencing_parameters.config","r"); # open the configure ile
+f = open("somatic_mutation_detecting_parameters.config","r"); # open the configure ile
 hash_table = {}; # define a hash table
 while 1:
     text = f.readline();
