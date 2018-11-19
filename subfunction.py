@@ -132,10 +132,9 @@ def runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,lan
  pool.join();
  outputSamFiles = getFileList(outputs_folder+'bwa_results/','.sam');
  print "\nSub-process(es) done."
- return outputSamFiles;
  command='rm '+ outputs_folder + 'trimmomatic_results/*';
  os.system(command)
-
+ return outputSamFiles;
  
 def runSAM(samtools_folder,gatk_tool,outputs_folder,inputfiles,typeNum,laneNum,threadNum):
  outputBamFiles = setOutputFileNames(inputfiles, '.bam', outputs_folder, 'samtools_results/',0);
@@ -164,7 +163,7 @@ def runSAM(samtools_folder,gatk_tool,outputs_folder,inputfiles,typeNum,laneNum,t
      inputString = inputString + ' INPUT=' + outputSortedBamFiles[i*laneNum + j];
      filestring = filestring + ' ' + outputSortedBamFiles[i*laneNum + j];
     command3 = 'java -Xmx16g -jar' + ' ' + gatk_tool + ' MergeSamFiles ' + inputString + ' OUTPUT=' + outputMergeFiles[i];
-    pool.apply_async(multiprocess1,(filestring,command3,));
+    os.system(command3)
   pool.close();
   pool.join();
   print "\nSub-process(es) done."
@@ -178,15 +177,18 @@ def runSAM(samtools_folder,gatk_tool,outputs_folder,inputfiles,typeNum,laneNum,t
  outputDedupMetircs = setOutputFileNames(outputMergeFiles, '_dedup.metrics', outputs_folder, 'samtools_results/',0);
  print " Notes: Multi-processing is applied to speed up the data processing";
  for i in range(typeNum):
-  command4 = 'java -Xmx16g -jar' + ' ' + gatk_tool + ' MarkDuplicates REMOVE_DUPLICATES=false MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=8000 INPUT=' + outputMergeFiles[i] + ' OUTPUT=' + outputDedupFiles[i] + ' METRICS_FILE=' + outputDedupMetircs[i];
+# command4 = 'java -Xmx16g -jar' + ' ' + gatk_tool + ' MarkDuplicates MAX_FILE_HANDLES_FOR_READ_ENDS_MAP=8000 INPUT=' + inputfiles[i] + ' OUTPUT=' + outputDedupFiles[i] + ' METRICS_FILE=' + outputDedupMetircs[i];
+  command4 = 'java -Xmx16g -jar' + ' ' + gatk_tool + ' MarkDuplicates -MAX_FILE_HANDLES_FOR_READ_ENDS_MAP 8000 -I ' + outputMergeFiles[i] + ' -O ' + outputDedupFiles[i] + ' -M ' + outputDedupMetircs[i];
   command5 = samtools_folder + 'samtools'+' index ' + outputDedupFiles[i];
-  pool.apply_async(multiprocess2,(outputMergeFiles[i],command4,command5,));
+  #pool.apply_async(multiprocess2,(outputMergeFiles[i],command4,command5,));
+  os.system(command4);
+  os.system(command5);
  pool.close();
  pool.join(); 
  print "\nSub-process(es) done."
- return outputDedupFiles;
  command='rm '+ outputs_folder + 'bwa_results/*';
- os.system(command)
+ #os.system(command)
+ return outputDedupFiles;    
  
 def runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,needRevisedData):
 # outputRealigerFiles = setOutputFileNames(inputFiles, '_realigner.intervals', outputs_folder, 'gatk_results/',0);
@@ -210,15 +212,17 @@ def runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeN
    command3 =  'java -Xmx16g -jar ' + gatk_tool + ' ApplyBQSR -R '+ ref_folder[0] + ' -I ' + inputFiles[i] + ' -bqsr ' + outputRecalRevisedFiles[i] + ' -O ' + outputRecalBamFiles[i]
    command4 = samtools_folder + 'samtools sort -@ 8 ' + outputRecalBamFiles[i] + ' -o ' + outputRecalsortBamFiles[i]
    command5 = samtools_folder + 'samtools index ' + outputRecalsortBamFiles[i]
-  # os.system(command4);
-  # os.system(command5);
-   pool.apply_async(multiprocess3,(inputFiles[i],command1,command2,command3,needRevisedData,));
+   os.system(command1);
+   os.system(command2);
+   os.system(command3);
+   os.system(command4);
+   os.system(command5);
  pool.close();
  pool.join(); 
 # print "\n Step 2 is finished. All the sub-process(es) done.\n"
- 
+ #command='rm '+ outputs_folder + 'samtools_results/*';
+# os.system(command);
  return outputRecalBamFiles;
- command='rm '+ outputs_folder + 'samtools_results/*'
  
 # MuTect to detect somatic mutation
 def runMUTECT2(gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,tumor_reads,normal_reads,tumor_f,normal_f,tumor_alt):
