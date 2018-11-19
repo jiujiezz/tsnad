@@ -187,7 +187,7 @@ def runSAM(samtools_folder,gatk_tool,outputs_folder,inputfiles,typeNum,laneNum,t
  pool.join(); 
  print "\nSub-process(es) done."
  command='rm '+ outputs_folder + 'bwa_results/*';
- #os.system(command)
+ os.system(command)
  return outputDedupFiles;    
  
 def runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,needRevisedData):
@@ -220,8 +220,8 @@ def runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeN
  pool.close();
  pool.join(); 
 # print "\n Step 2 is finished. All the sub-process(es) done.\n"
- #command='rm '+ outputs_folder + 'samtools_results/*';
-# os.system(command);
+ command='rm '+ outputs_folder + 'samtools_results/*';
+ os.system(command);
  return outputRecalBamFiles;
  
 # MuTect to detect somatic mutation
