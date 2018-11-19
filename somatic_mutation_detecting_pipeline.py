@@ -143,7 +143,7 @@ print "So far the 2nd procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
 print "*** Beginning the 3rd procedure: Samtools to rearrange the sequence...\n"
-outputIndFiles = subfunction.runSAM(samtools_folder,picardtools_tool,outputs_folder,outputSamFiles,typeNum,laneNum,threadNum);
+outputIndFiles = subfunction.runSAM(samtools_folder,gatk_tool,outputs_folder,outputSamFiles,typeNum,laneNum,threadNum);
 print "So far the 3rd procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
@@ -163,7 +163,7 @@ print "So far the 6th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
 print "*** Beginning the 7th procedure: HLA typing...\n"
-subfunction.runHLA(soaphla_folder,outputs_folder,outputSamFiles,typeNum);
+subfunction.runHLA(soaphla_folder,outputs_folder,outputRecalBamFiles,typeNum);
 print "So far the 7th procedure done.\n\n"
 
 if RNA_seq_folder:
