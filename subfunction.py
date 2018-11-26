@@ -100,10 +100,10 @@ def setHeaderNames(typeNum,laneNum):
    sampleHeaderNames = [r'@RG\tID:normalcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_GRCh38\tSM:normal',r'@RG\tID:tumorcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_GRCh38\tSM:tumor'];
  else:
    for i in range(laneNum):
-     header = r'@RG\tID:normalcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_GRCh38\tSM:normal';
+     header = r'@RG\tID:normalcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_GRCh37\tSM:normal';
      sampleHeaderNames.append(header);
    for i in range(laneNum):
-     header = r'@RG\tID:tumorcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_GRCh38\tSM:tumor';
+     header = r'@RG\tID:tumorcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_GRCh37\tSM:tumor';
      sampleHeaderNames.append(header);
  return sampleHeaderNames;
 
