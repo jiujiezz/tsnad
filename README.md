@@ -72,7 +72,7 @@ TSNAD uses the following software and libraries:
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/human_g1k_v37.2bit.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/human_g1k_v37.dict.gz
 	
-	uncompress all the downloaded files and put in the same folder (e.g. gatk\*/b37/)
+	uncompress all the downloaded files and put in the same folder (e.g. gatk-\*/b37/)
 	
 5. VEP
 
