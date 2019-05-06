@@ -196,10 +196,12 @@ then
 ## Update log
 
 ### V1.0 
+2017.4
 1. GUI for neoantigen prediction  
 2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
 
 ### V1.1
+2018.11
 1. Trimmomatic v0.35 -> v0.38  
 2. BWA v0.7.12 -> v0.7.17  
 3. Samtools v1.3 -> v1.9  
