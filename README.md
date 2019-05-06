@@ -3,8 +3,8 @@
  Neoantigen prediction from WGS or WES.    
    
  Authors: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu.  
- Date: November 2018  
- Version: 1.1  
+ Date: May 2019  
+ Version: 1.2  
  License: TSNAD is released under GNU license  
 
 ## Introduction  
@@ -93,7 +93,7 @@ TSNAD uses the following software and libraries:
 		cd ensembl-vep-release-*
 		perl INSTALL.pl
 	
-	download the API, download the cache 242 *homo_sapiens_merged_vep_94_GRCh37.tar.gz*.
+	download the API, download the cache 242 *homo_sapiens_merged_vep_94_GRCh37.tar.gz* for b37, download the cache 242 *homo_sapiens_merged_vep_94_GRCh37.tar.gz* for hg38.
 	
 	if it is not help, try following step:
 		
