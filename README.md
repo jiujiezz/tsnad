@@ -120,10 +120,18 @@ TSNAD uses the following software and libraries:
 
 		unzip hisat2-*.zip
 		cd hisat2-*
+		
+		The necessary files for b37
 		wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch37.tar.gz 
-		wget ftp://ftp.ensembl.org/pub/grch37/release-94/gtf/homo_sapiens/Homo_sapiens.GRCh37.87.gtf.gz
+		wget ftp://ftp.ensembl.org/pub/grch37/release-96/gtf/homo_sapiens/Homo_sapiens.GRCh37.87.gtf.gz
 		tar -xvf grch37.tar.gz
 		gunzip Homo_sapiens.GRCh37.87.gtf.gz -d
+		
+		The necessary files for hg38
+		wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38.tar.gz
+		wget ftp://ftp.ensembl.org/pub/release-96/gtf/homo_sapiens/Homo_sapiens.GRCh38.96.gtf.gz
+		tar -xvf grch38.tar.gz
+		gunzip Homo_sapiens.GRCh38.96.gtf.gz -d
 
 7. stringtie
 
