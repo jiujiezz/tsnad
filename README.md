@@ -21,7 +21,7 @@ TSNAD uses the following software and libraries:
 5. [VEP](https://github.com/Ensembl/ensembl-vep/archive/release/94.zip)   
 6. [hisat2](http://ccb.jhu.edu/software/hisat2/dl/hisat2-2.1.0-Linux_x86_64.zip)   
 7. stringtie  (In Tools/)
-8. SOAP-HLA  (In Tools/)
+8. kourami  (In Tools/)
 9. NetMHCpan4.0  (In Tools/)
 10. JAVA     
 11. Python    
@@ -116,9 +116,11 @@ TSNAD uses the following software and libraries:
 
 		tar -xvf stringtie-*.tar.gz
 		
-8. SOAP-HLA
+8. kourami
 		
-		unzip SOAP-HLA.zip
+		cd kourami*
+		mvn install
+		scripts/download_panel.sh
 		
 9. NetMHCpan4.0 
 		
