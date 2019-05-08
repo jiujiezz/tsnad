@@ -143,7 +143,7 @@ TSNAD uses the following software and libraries:
 	
 		unzip SOAP-HLA.zip
 		
-9. kourami
+9. kourami (mvn and bamUtil is needed)
 		
 		cd kourami*
 		mvn install
