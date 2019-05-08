@@ -18,16 +18,17 @@ TSNAD uses the following software and libraries:
 2. bwa  (In Tools/)  
 3. samtools  (In Tools/)     
 4. [GATK](https://github.com/broadinstitute/gatk/releases/download/4.0.11.0/gatk-4.0.11.0.zip)   
-5. [VEP](https://github.com/Ensembl/ensembl-vep/archive/release/94.zip)   
+5. [VEP](https://github.com/Ensembl/ensembl-vep/archive/release/96.zip)   
 6. [hisat2](http://ccb.jhu.edu/software/hisat2/dl/hisat2-2.1.0-Linux_x86_64.zip)   
 7. stringtie  (In Tools/)
-8. kourami  (In Tools/)
-9. NetMHCpan4.0  (In Tools/)
-10. JAVA     
-11. Python    
-12. Perl   
+8. SOAP-HLA (for b37, in Tools/)
+9. kourami  (for hg38, in Tools/)
+10. NetMHCpan4.0  (In Tools/)
+11. JAVA     
+12. Python    
+13. Perl   
   
-1-9 tools are better put in the folder Tools/.   
+1-10 tools are better put in the folder Tools/.   
 
 ## Installation of each module
 1. Trimmomatic   
@@ -85,7 +86,7 @@ TSNAD uses the following software and libraries:
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/Homo_sapiens_assembly38.fasta.64.alt
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/Homo_sapiens_assembly38.dict
 	
-	uncompress all the downloaded files and put them in the same folder (e.g. gatk-\*/b37/)
+	uncompress all the downloaded files and put them in the same folder (e.g. gatk-*/b37/)
 	
 5. VEP
 
@@ -136,20 +137,28 @@ TSNAD uses the following software and libraries:
 7. stringtie
 
 		tar -xvf stringtie-*.tar.gz
+
+8. SOAP-HLA
+	
+		unzip SOAP-HLA.zip
 		
-8. kourami
+9. kourami
 		
 		cd kourami*
 		mvn install
 		scripts/download_panel.sh
+		scripts/download_grch38.sh hs38DH
+		scripts/download_grch38.sh hs38NoAltDH
+		bwa index resources/hs38DH.fa
+		bwa index resources/hs38NoAltDH.fa
 		
-9. NetMHCpan4.0 
+10. NetMHCpan4.0 
 		
 		unzip netMHCpan-4.0.zip
 		cd netMHCpan-4.0
 		vim netMHCpan
 		
- 	change the *full path* and *tmpdir path* in your own path.
+ 	change the *full path* and *tmpdir path* to your own path.
 
 
 ## Usage  
@@ -171,6 +180,7 @@ The *RNA_seq_folder* must be empty if you don't have RNA-seq data.
 		hisat2_folder /home/biopharm/Software/TSNAD_update-master/Tools/hisat2-2.1.0/
 		stringtie_tool /home/biopharm/Software/TSNAD_update-master/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
 		soaphla_folder /home/biopharm/Software/TSNAD_update-master/Tools/SOAP-HLA/
+		kourami_folder	/home/biopharm/Software/TSNAD_update-master/Tools/kourami/
 		inputs_folder /home/biopharm/Research/TSNAD_update_sample/
 		RNA_seq_folder /media/biopharm/data2/NAJ_data/Lab_RNA-seq/S0517021701/
 		outputs_folder /home/biopharm/Software/TSNAD_update-master/results/
@@ -232,8 +242,11 @@ then
 5. GATK v3.5 -> v4.0.11.0  
 6. Annovar -> VEP v94  
 7. NetMHCpan v2.8 -> v4.0
- 
-Add the function of RNA-seq analysis for neoantigen filter.
+8. Add the function of RNA-seq analysis for neoantigen filter.
 
-  
+### V1.2
+2019.5
+1. VEP v94 -> v96
+2. Add the selection of hg38 when calling mutations.
+
  
