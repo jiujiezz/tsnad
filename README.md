@@ -6,6 +6,7 @@
  Date: May 2019  
  Version: 1.2  
  License: TSNAD is released under GNU license  
+ System: Linux
 
 ## Introduction  
 
