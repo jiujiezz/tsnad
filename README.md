@@ -95,7 +95,7 @@ TSNAD uses the following software and libraries:
 		cd ensembl-vep-release-*
 		perl INSTALL.pl
 	
-	download the API, download the cache 242 *homo_sapiens_merged_vep_94_GRCh37.tar.gz* for b37, download the cache 243 *homo_sapiens_merged_vep_94_GRCh38.tar.gz* for hg38.
+	download the API, download the cache 242 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for b37, download the cache 243 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for hg38.
 	
 	if it is not help, try following step:
 		
@@ -172,7 +172,8 @@ The *RNA_seq_folder* must be empty if you don't have RNA-seq data.
 
 *hisat2_folder* and *stringtie_tool* are used for RNA-seq analysis. 
 
-	
+
+		version_of_hg hg38
 		trimmomatic_tool /home/biopharm/Software/TSNAD_update-master/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
 		bwa_folder /home/biopharm/Software/TSNAD_update-master/Tools/bwa-0.7.17/
 		samtools_folder /home/biopharm/Software/TSNAD_update-master/Tools/samtools-1.9/
@@ -181,14 +182,14 @@ The *RNA_seq_folder* must be empty if you don't have RNA-seq data.
 		hisat2_folder /home/biopharm/Software/TSNAD_update-master/Tools/hisat2-2.1.0/
 		stringtie_tool /home/biopharm/Software/TSNAD_update-master/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
 		soaphla_folder /home/biopharm/Software/TSNAD_update-master/Tools/SOAP-HLA/
-		kourami_folder	/home/biopharm/Software/TSNAD_update-master/Tools/kourami/
+		kourami_folder  /home/biopharm/Software/TSNAD_update-master/Tools/kourami/
 		inputs_folder /home/biopharm/Research/TSNAD_update_sample/
 		RNA_seq_folder /media/biopharm/data2/NAJ_data/Lab_RNA-seq/S0517021701/
 		outputs_folder /home/biopharm/Software/TSNAD_update-master/results/
-		ref_human_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/b37/human_g1k_v37.fasta
-		ref_1000G_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/b37/1000G_phase1.snps.high_confidence.b37.vcf
-		ref_Mills_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/b37/Mills_and_1000G_gold_standard.indels.b37.vcf
-		ref_dbsnp_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/b37/dbsnp_138.b37.vcf
+		ref_human_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/human_g1k_v37.fasta
+		ref_1000G_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
+		ref_Mills_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
+		ref_dbsnp_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38.vcf
 		headcrop 10
 		leading 3
 		minlen 35
