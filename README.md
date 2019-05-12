@@ -178,7 +178,7 @@ The *RNA_seq_folder* must be empty if you don't have RNA-seq data.
 		bwa_folder /home/biopharm/Software/TSNAD_update-master/Tools/bwa-0.7.17/
 		samtools_folder /home/biopharm/Software/TSNAD_update-master/Tools/samtools-1.9/
 		gatk_tool /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
-		VEP_folder /home/biopharm/Software/TSNAD_update-master/Tools/ensembl-vep-release-94/
+		VEP_folder /home/biopharm/Software/TSNAD_update-master/Tools/ensembl-vep-release-96/
 		hisat2_folder /home/biopharm/Software/TSNAD_update-master/Tools/hisat2-2.1.0/
 		stringtie_tool /home/biopharm/Software/TSNAD_update-master/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
 		soaphla_folder /home/biopharm/Software/TSNAD_update-master/Tools/SOAP-HLA/
