@@ -89,6 +89,10 @@ TSNAD uses the following software and libraries:
 	
 	uncompress all the downloaded files and put them in the same folder (e.g. gatk-*/b37/)
 	
+	to note, the chromosome name in dbsnp file is different from other files, so we need to transform it as follows :
+		
+		perl sub/transform.pl dbsnp_138.b37.vcf dbsnp_138.b37_adj.vcf
+	
 5. VEP
 
 		unzip ensembl-vep-release-*.zip
