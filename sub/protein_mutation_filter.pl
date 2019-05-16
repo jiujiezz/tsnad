@@ -1,11 +1,11 @@
 #!/usr/bin/perl -w
 # ******************** Software Information *******************
-# Version: TSNAD v1.1
+# Version: TSNAD v1.2
 # File: protein_mutation_filter.pl
 # Perl Version: 5.18.2
-# Finish time: November, 2018.
+# Finish time: May, 2019.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-# Copyright (C) 2018-2019 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 use strict;

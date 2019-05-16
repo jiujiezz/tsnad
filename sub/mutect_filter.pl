@@ -1,11 +1,11 @@
 #!/usr/bin/perl-w
 # ******************** Software Information *******************
-# Version: Somatic_Mutation_Detector 3.0
+# Version: TSNAD v1.2
 # File: mutect_filter.pl
 # Perl Version: 5.18.2
-# Finish time: Octobor, 2018.
+# Finish time: May, 2019.
 # Developer: Jingcheng Wu, Zhan Zhou, Wenyi Zhao 
-# Copyright (C) 2018-2019 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 use strict;
