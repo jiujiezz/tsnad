@@ -178,22 +178,22 @@ The *RNA_seq_folder* must be empty if you don't have RNA-seq data.
 
 
 		version_of_hg hg38
-		trimmomatic_tool /home/biopharm/Software/TSNAD_update-master/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
-		bwa_folder /home/biopharm/Software/TSNAD_update-master/Tools/bwa-0.7.17/
-		samtools_folder /home/biopharm/Software/TSNAD_update-master/Tools/samtools-1.9/
-		gatk_tool /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
-		VEP_folder /home/biopharm/Software/TSNAD_update-master/Tools/ensembl-vep-release-96/
-		hisat2_folder /home/biopharm/Software/TSNAD_update-master/Tools/hisat2-2.1.0/
-		stringtie_tool /home/biopharm/Software/TSNAD_update-master/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
-		soaphla_folder /home/biopharm/Software/TSNAD_update-master/Tools/SOAP-HLA/
-		kourami_folder  /home/biopharm/Software/TSNAD_update-master/Tools/kourami/
-		inputs_folder /home/biopharm/Research/TSNAD_update_sample/
+		trimmomatic_tool /media/biopharm/data1/TSNAD_update-master/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
+		bwa_folder /media/biopharm/data1/TSNAD_update-master/Tools/bwa-0.7.17/
+		samtools_folder /media/biopharm/data1/TSNAD_update-master/Tools/samtools-1.9/
+		gatk_tool /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
+		VEP_folder /media/biopharm/data1/TSNAD_update-master/Tools/ensembl-vep-release-96/
+		hisat2_folder /media/biopharm/data1/TSNAD_update-master/Tools/hisat2-2.1.0/
+		stringtie_tool /media/biopharm/data1/TSNAD_update-master/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
+		soaphla_folder /media/biopharm/data1/TSNAD_update-master/Tools/SOAP-HLA/
+		kourami_folder  /media/biopharm/data1/TSNAD_update-master/Tools/kourami/
+		inputs_folder /home/biopharm/renjianan/
 		RNA_seq_folder /media/biopharm/data2/NAJ_data/Lab_RNA-seq/S0517021701/
-		outputs_folder /home/biopharm/Software/TSNAD_update-master/results/
-		ref_human_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/human_g1k_v37.fasta
-		ref_1000G_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
-		ref_Mills_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
-		ref_dbsnp_file /home/biopharm/Software/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38.vcf
+		outputs_folder /media/biopharm/data1/TSNAD_update-master/results/
+		ref_human_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/Homo_sapiens_assembly38.fasta
+		ref_1000G_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
+		ref_Mills_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
+		ref_dbsnp_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38_adj.vcf
 		headcrop 10
 		leading 3
 		minlen 35
@@ -217,15 +217,16 @@ then
 
 2. configure the file *antigen_predicting_parameters.config* ,
 
+		version_of_hg hg38
 		A1 02:01
 		A2 02:01
 		B1 27:05
 		B2 15:18
 		C1 07:04
 		C2 02:02
-		Input_file /home/biopharm/Software/TSNAD_update-master/results/vep_results/mutect_call_adj_vep_filtered.txt
-		Outputs_folder /home/biopharm/Software/TSNAD_update-master/results/netmhcpan_results/
-		netMHCpan_folder /home/biopharm/Software/TSNAD_update-master/Tools/netMHCpan-4.0/
+		Input_file /media/biopharm/data1/TSNAD_update-master/results/vep_results/mutect_call_adj_vep_filtered.txt
+		Outputs_folder /media/biopharm/data1/TSNAD_update-master/results/netmhcpan_results/
+		netMHCpan_folder /media/biopharm/data1/TSNAD_update-master/Tools/netMHCpan-4.0/
 		peptide_length 8,9,10,11
 
 then 
