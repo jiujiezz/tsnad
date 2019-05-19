@@ -1,11 +1,17 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
-# Version: TSNAD v1.1
+# Version: TSNAD v1.2
 # File: subfunction.py
 # Python Version: 2.7.11
+#<<<<<<< master
+# Finish time: May, 2019.
+# Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren
+# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
+#=======
 # Finish time: November, 2018.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
 # Copyright (C) 2016-2018 - College of Pharmaceutical Sciences, 
+#>>>>>>> master
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 # 
@@ -46,7 +52,6 @@ def setOutputFileNames(fileList,sub_string,output_folder,sub_folder,flag):
    p,f = os.path.split(fileList[i*flag]);
    file_name = f.split("_")[0];  # get file name
    outputName = output_folder + sub_folder + file_name + sub_string;
-   #outputName = output_folder + sub_folder + file_name[0:8] + sub_string; # file_name[0:8] maybe have some problems, one solution is that sample filename must conform to our rules
    outputFileList.append(outputName);
  return outputFileList;
 
@@ -94,23 +99,23 @@ def runTrimmomatic(trimmomatic_tool,outputs_folder,fileList,leading,trailing,hea
 
  
 # Consider normalcell and tumocell as inputs in default, namely typeNum = 2 in default
-def setHeaderNames(typeNum,laneNum):
+def setHeaderNames(typeNum,laneNum,version_of_hg):
  sampleHeaderNames = [];
  if laneNum <= 1:
-   sampleHeaderNames = [r'@RG\tID:normalcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_GRCh38\tSM:normal',r'@RG\tID:tumorcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_GRCh38\tSM:tumor'];
+   sampleHeaderNames = [r'@RG\tID:normalcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_'+ version_of_hg  + '\tSM:normal',r'@RG\tID:tumorcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_GRCh38\tSM:tumor'];
  else:
    for i in range(laneNum):
-     header = r'@RG\tID:normalcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_GRCh37\tSM:normal';
+     header = r'@RG\tID:normalcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_' + version_of_hg + '\tSM:normal';
      sampleHeaderNames.append(header);
    for i in range(laneNum):
-     header = r'@RG\tID:tumorcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_GRCh37\tSM:tumor';
+     header = r'@RG\tID:tumorcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_' + version_of_hg + '\tSM:tumor';
      sampleHeaderNames.append(header);
  return sampleHeaderNames;
 
 # Long sequence processing in default. pair-end, single reads data is not considered 
-def runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,laneNum,partNum,threadNum):
+def runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,laneNum,partNum,threadNum,version_of_hg):
  # set header
- sampleHeaderNames = setHeaderNames(typeNum,laneNum);
+ sampleHeaderNames = setHeaderNames(typeNum,laneNum,version_of_hg);
  outputSamFiles = setOutputFileNames(inputFiles, '.sam', outputs_folder, 'bwa_results/',partNum);
  filesNum = len(outputSamFiles);
  pool = multiprocessing.Pool();
@@ -133,7 +138,7 @@ def runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,lan
  outputSamFiles = getFileList(outputs_folder+'bwa_results/','.sam');
  print "\nSub-process(es) done."
  command='rm '+ outputs_folder + 'trimmomatic_results/*';
- os.system(command)
+ #os.system(command)
  return outputSamFiles;
  
 def runSAM(samtools_folder,gatk_tool,outputs_folder,inputfiles,typeNum,laneNum,threadNum):
@@ -187,12 +192,10 @@ def runSAM(samtools_folder,gatk_tool,outputs_folder,inputfiles,typeNum,laneNum,t
  pool.join(); 
  print "\nSub-process(es) done."
  command='rm '+ outputs_folder + 'bwa_results/*';
- os.system(command)
+ #os.system(command)
  return outputDedupFiles;    
  
 def runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,needRevisedData):
-# outputRealigerFiles = setOutputFileNames(inputFiles, '_realigner.intervals', outputs_folder, 'gatk_results/',0);
- #outputRealnFiles = setOutputFileNames(inputFiles, '.bam', outputs_folder, 'gatk_results/',0);
  pool = multiprocessing.Pool();
  outputRecalFiles = setOutputFileNames(inputFiles, '_recal.grp', outputs_folder, 'gatk_results/',0);
  outputRecalRevisedFiles = setOutputFileNames(outputRecalFiles, '.report', outputs_folder, 'gatk_results/',0);
@@ -200,12 +203,6 @@ def runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeN
  outputRecalsortBamFiles = setOutputFileNames(inputFiles, '_recal_sort.bam', outputs_folder, 'gatk_results/',0);
  pool = multiprocessing.Pool();
  print " Notes: Multi-processing is applied to speed up the data processing";
-# commandi1= 'java -Xmx16g -jar ' + gatk_tool + ' IndexFeatureFile -F ' + ref_folder[1]
-# commandi2= 'java -Xmx16g -jar ' + gatk_tool + ' IndexFeatureFile -F ' + ref_folder[2]
-# commandi3= 'java -Xmx16g -jar ' + gatk_tool + ' IndexFeatureFile -F ' + ref_folder[3]
-# os.system(commandi1);
-# os.system(commandi2);
-# os.system(commandi3);
  for i in range(typeNum):
    command1 = 'java -Xmx16g -jar ' + gatk_tool + ' BaseRecalibrator -R ' + ref_folder[0] + ' -I ' + inputFiles[i] + ' -O ' + outputRecalFiles[i] + ' --known-sites ' + ref_folder[3] + ' --known-sites ' + ref_folder[2] + ' --known-sites ' + ref_folder[1];
    command2 =  'java -Xmx16g -jar ' + gatk_tool + ' GatherBQSRReports -I ' + outputRecalFiles[i] + ' -O ' + outputRecalRevisedFiles[i]
@@ -219,7 +216,6 @@ def runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeN
    os.system(command5);
  pool.close();
  pool.join(); 
-# print "\n Step 2 is finished. All the sub-process(es) done.\n"
  command='rm '+ outputs_folder + 'samtools_results/*';
  os.system(command);
  return outputRecalBamFiles;
@@ -268,17 +264,40 @@ def runHLA(soaphla_folder,outputs_folder,inputFiles,typeNum):
  print "\nSub-process(es) done."
  return;
 
+def runkourami(kourami_folder,inputFiles,typeNum):
+    pool = multiprocessing.Pool();
+    print " Notes: Multi-processing is applied to speed up the data processing";
+    for i in range(typeNum):
+        p,f = os.path.split(inputFiles[i]);
+        file_name = f.split("_")[0];
+        os.chdir(p+'/../kourami_results/');
+        command1 = 'bash ' + kourami_folder + 'scripts/alignAndExtract_hs38DH.sh ' + file_name + ' ' + inputFiles[i];
+        command2 = 'java -jar ' + kourami_folder + 'target/Kourami.jar -d ' + kourami_folder + 'db/ -o ' + file_name + ' ' + file_name + '_on_KouramiPanel.bam';
+        os.system(command1)
+        os.system(command2)
+        os.chdir(p+"/../../")
+        print "\nSub-process(es) done."
+    return;
+
+
 # RNA-seq analysis 
-def runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,outputs_folder):
+def runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,outputs_folder,version_of_hg):
     current_path = sys.path[0];
     inputFile = getFileList(RNA_seq_folder,'fastq.gz')
     p,f = os.path.split(inputFile[0]);
     file_name = f.split("_")[0];
-    command1 = hisat2_folder + 'hisat2 -p 8 --dta -x ' + hisat2_folder + 'grch37/genome -1 ' + inputFile[0] + ' -2 ' + inputFile[1] + ' -S ' +  outputs_folder + 'hisat2_results/' + file_name + '.sam'
-    command2 = samtools_folder + 'samtools sort -@ 8 -o ' + outputs_folder + 'hisat2_results/' + file_name + '.bam ' + outputs_folder + 'hisat2_results/' + file_name + '.sam'
-    command3 = samtools_folder + 'samtools index ' + outputs_folder + 'hisat2_results/' + file_name + '.bam'
-    command4 = stringtie_tool + ' -p 8 -G ' + hisat2_folder + 'Homo_sapiens.GRCh37.87.gtf -A ' + outputs_folder + 'hisat2_results/' + file_name + '.gtf -l ' + file_name + ' ' +  outputs_folder + 'hisat2_results/' +  file_name + '.bam'
-    command5 = 'perl ' + current_path + '/sub/expression_filter.pl ' + outputs_folder + 'vep_results/mutect_call_adj_vep_filtered.txt ' + outputs_folder + 'hisat2_results/' + file_name + '.gtf ' + outputs_folder + 'vep_results/mutect_call_adj_vep_filtered_with_expression.txt';
+    if 'b37' in version_of_hg:
+        command1 = hisat2_folder + 'hisat2 -p 8 --dta -x ' + hisat2_folder + 'grch37/genome -1 ' + inputFile[0] + ' -2 ' + inputFile[1] + ' -S ' +  outputs_folder + 'hisat2_results/' + file_name + '.sam'
+        command2 = samtools_folder + 'samtools sort -@ 8 -o ' + outputs_folder + 'hisat2_results/' + file_name + '.bam ' + outputs_folder + 'hisat2_results/' + file_name + '.sam'
+        command3 = samtools_folder + 'samtools index ' + outputs_folder + 'hisat2_results/' + file_name + '.bam'
+        command4 = stringtie_tool + ' -p 8 -G ' + hisat2_folder + 'Homo_sapiens.GRCh37.87.gtf -A ' + outputs_folder + 'hisat2_results/' + file_name + '.gtf -l ' + file_name + ' ' +  outputs_folder + 'hisat2_results/' +  file_name + '.bam'
+        command5 = 'perl ' + current_path + '/sub/expression_filter.pl ' + outputs_folder + 'vep_results/mutect_call_adj_vep_filtered.txt ' + outputs_folder + 'hisat2_results/' + file_name + '.gtf ' + outputs_folder + 'vep_results/mutect_call_adj_vep_filtered_with_expression_' + version_of_hg +'.txt';
+    if 'hg38' in version_of_hg:
+        command1 = hisat2_folder + 'hisat2 -p 8 --dta -x ' + hisat2_folder + 'grch38/genome -1 ' + inputFile[0] + ' -2 ' + inputFile[1] + ' -S ' +  outputs_folder + 'hisat2_results/' + file_name + '.sam'                                 
+        command2 = samtools_folder + 'samtools sort -@ 8 -o ' + outputs_folder + 'hisat2_results/' + file_name + '.bam ' + outputs_folder + 'hisat2_results/' + file_name + '.sam'
+        command3 = samtools_folder + 'samtools index ' + outputs_folder + 'hisat2_results/' + file_name + '.bam'
+        command4 = stringtie_tool + ' -p 8 -G ' + hisat2_folder + 'Homo_sapiens.GRCh38.96.gtf -A ' + outputs_folder + 'hisat2_results/' + file_name + '.gtf -l ' + file_name + ' ' +  outputs_folder + 'hisat2_results/' +  file_name + '.bam'
+        command5 = 'perl ' + current_path + '/sub/expression_filter.pl ' + outputs_folder + 'vep_results/mutect_call_adj_vep_filtered.txt ' + outputs_folder + 'hisat2_results/' + file_name + '.gtf ' + outputs_folder + 'vep_results/mutect_call_adj_vep_filtered_with_expression_' + version_of_hg +'.txt';
     print command1
     print command2
     print command3

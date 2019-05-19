@@ -1,11 +1,17 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
-# Version: TSNAD v1.1
+# Version: TSNAD v1.2
 # File: somatic_mutation_detecting_pipeline.py
 # Python Version: 2.7.11
+#<<<<<<< master
+# Finish time: May, 2019.
+# Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren
+# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
+#=======
 # Finish time: November, 2018.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
 # Copyright (C) 2016-2018 - College of Pharmaceutical Sciences, 
+#>>>>>>> master
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 import datetime
@@ -31,6 +37,7 @@ f.close();
 print "Printing all the setted parameters (system and project parameters)...\n"
 print "***************************************************************** Parameters ******************************************************************\n"
 print "System parameters are:"
+print "version_of_hg: %s"%hash_table['version_of_hg']
 print "inputs_folder: %s"%hash_table['inputs_folder']
 print "outputs_folder: %s"%hash_table['outputs_folder']
 print "trimmomatic_tool: %s"%hash_table['trimmomatic_tool']
@@ -38,6 +45,7 @@ print "bwa_folder:",hash_table['bwa_folder']
 print "samtools_folder: %s"%hash_table['samtools_folder']
 print "gatk_tool: %s"%hash_table['gatk_tool']
 print "soaphla_folder: %s"%hash_table['soaphla_folder']
+print "kourami_folder: %s"%hash_table['kourami_folder']
 
 print "\nProject parameters are:"
 print "ref_human_file: %s"%hash_table['ref_human_file']
@@ -62,6 +70,7 @@ print "tumor_alt: %s"%hash_table['tumor_alt']
 print "***********************************************************************************************************************************************\n"
 
 # Parameter preprocessing
+version_of_hg = hash_table['version_of_hg']
 inputs_folder = hash_table['inputs_folder']
 outputs_folder = hash_table['outputs_folder']
 RNA_seq_folder = hash_table['RNA_seq_folder']
@@ -73,6 +82,7 @@ hisat2_folder = hash_table['hisat2_folder']
 stringtie_tool = hash_table['stringtie_tool']
 VEP_folder = hash_table['VEP_folder']
 soaphla_folder = hash_table['soaphla_folder']
+kourami_folder = hash_table['kourami_folder']
 
 leading = hash_table['leading']
 trailing = hash_table['trailing']
@@ -115,7 +125,7 @@ else:
     
 # Reading the folder where project locates
 print "All results will be stored in folder %s"%outputs_folder;
-folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","soaphla_results","hisat2_results"]; 
+folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","soaphla_results","kourami_results","hisat2_results"]; 
 
 # define all the folder names we may use
 for s in folder_name:
@@ -138,7 +148,7 @@ print "So far the 1st procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
 print "*** Beginning the 2nd procedure: BWA mapping to genome reference sequence...\n"
-outputSamFiles = subfunction.runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,outputCleanedFile,typeNum,laneNum,partNum,threadNum);
+outputSamFiles = subfunction.runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,outputCleanedFile,typeNum,laneNum,partNum,threadNum,version_of_hg);
 print "So far the 2nd procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
@@ -163,13 +173,17 @@ print "So far the 6th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
 print "*** Beginning the 7th procedure: HLA typing...\n"
-subfunction.runHLA(soaphla_folder,outputs_folder,outputRecalBamFiles,typeNum);
+if 'b37' in version_of_hg:
+    subfunction.runHLA(soaphla_folder,outputs_folder,outputRecalBamFiles,typeNum);
+if 'hg38' in version_of_hg:
+    subfunction.runkourami(kourami_folder,outputRecalBamFiles,typeNum);
 print "So far the 7th procedure done.\n\n"
+
 
 if RNA_seq_folder:
     print "*************************************************************************************************************************************"
     print "*** Beginning the 8th procedure: RNA-seq analysis...\n"
-    subfunction.runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,outputs_folder);
+    subfunction.runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,outputs_folder,version_of_hg);
     print "So far the 8th procedure done.\n\n"
 
 # Presenting the final results

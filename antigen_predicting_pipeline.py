@@ -1,11 +1,17 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
-# Version: TSNAD v1.1
+# Version: TSNAD v1.2
 # File: antigen_predicting_pipeline.py
 # Python Version: 2.7.11
+#<<<<<<< master
+# Finish time: May, 2019.
+# Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren
+# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
+#=======
 # Finish time: November, 2018.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
 # Copyright (C) 2016-2018 - College of Pharmaceutical Sciences, 
+#>>>>>>> master
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 import datetime
@@ -29,6 +35,7 @@ f.close();
 # Ouput all the setting parameters in the configure file
 print "Printing all the setted parameters...\n"
 print "***************************************************************** Parameters ******************************************************************\n"
+print "version_of_hg: %s"%hash_table['version_of_hg']
 print "input_file: %s"%hash_table['Input_file']
 print "outputs_folder: %s"%hash_table['Outputs_folder']
 print "netMHCpan_folder: %s"%hash_table['netMHCpan_folder']
@@ -42,6 +49,7 @@ print "peptide_length: %s"%hash_table['peptide_length']
 print "***********************************************************************************************************************************************\n"
 
 # Parameter preprocessing
+version_of_hg = hash_table['version_of_hg']
 input_file = hash_table['Input_file']
 outputs_folder = hash_table['Outputs_folder']
 netMHCpan_folder = hash_table['netMHCpan_folder']
@@ -78,7 +86,10 @@ work_path = current_path + '/sub/'; # enter the sub folder
 
 print "Begining protein mutation filtering..."
 print "Processing file: %s"%input_file,"\n"
-command1 = 'perl ' + work_path + 'protein_mutation_filter.pl ' + input_file + ' ' + output_21aa_peptides + ' ' + work_path + 'protein_sequences_b37.fa';
+if 'b37' in version_of_hg:
+    command1 = 'perl ' + work_path + 'protein_mutation_filter.pl ' + input_file + ' ' + output_21aa_peptides + ' ' + work_path + 'protein_sequences_b37.fa';
+if 'hg38' in version_of_hg:
+    command1 = 'perl ' + work_path + 'protein_mutation_filter.pl ' + input_file + ' ' + output_21aa_peptides + ' ' + work_path + 'protein_sequences_b38.fa';
 os.system(command1);
 print "Protein mutation filtering done.\n\n"
 

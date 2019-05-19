@@ -1,6 +1,11 @@
-# Finish time: January, 2016.
+#!/usr/bin/perl -w
+# ******************** Software Information *******************
+# Version: TSNAD v1.2
+# File: netMHCpan_filter.pl
+# Perl Version: 5.18.2
+# Finish time: May, 2019.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-# Copyright (C) 2015-2016 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 use strict;
