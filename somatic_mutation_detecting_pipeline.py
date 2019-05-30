@@ -7,11 +7,6 @@
 # Finish time: May, 2019.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren
 # Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
-#=======
-# Finish time: November, 2018.
-# Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-# Copyright (C) 2016-2018 - College of Pharmaceutical Sciences, 
-#>>>>>>> master
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 import datetime

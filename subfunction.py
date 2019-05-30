@@ -6,12 +6,7 @@
 #<<<<<<< master
 # Finish time: May, 2019.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren
-# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
-#=======
-# Finish time: November, 2018.
-# Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
-# Copyright (C) 2016-2018 - College of Pharmaceutical Sciences, 
-#>>>>>>> master
+# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences,
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 # 
@@ -102,13 +97,13 @@ def runTrimmomatic(trimmomatic_tool,outputs_folder,fileList,leading,trailing,hea
 def setHeaderNames(typeNum,laneNum,version_of_hg):
  sampleHeaderNames = [];
  if laneNum <= 1:
-   sampleHeaderNames = [r'@RG\tID:normalcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_'+ version_of_hg  + '\tSM:normal',r'@RG\tID:tumorcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_GRCh38\tSM:tumor'];
+   sampleHeaderNames = [r'@RG\tID:normalcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_'+ version_of_hg  + r'\tSM:normal',r'@RG\tID:tumorcell\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_' + version_of_hg + r'\tSM:tumor'];
  else:
    for i in range(laneNum):
-     header = r'@RG\tID:normalcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_' + version_of_hg + '\tSM:normal';
+     header = r'@RG\tID:normalcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:normal_' + version_of_hg + r'\tSM:normal';
      sampleHeaderNames.append(header);
    for i in range(laneNum):
-     header = r'@RG\tID:tumorcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_' + version_of_hg + '\tSM:tumor';
+     header = r'@RG\tID:tumorcell'+'-L'+str(i+1)+r'\tPL:Illumina\tPU:Illumina_XSeq\tLB:tumor_' + version_of_hg + r'\tSM:tumor';
      sampleHeaderNames.append(header);
  return sampleHeaderNames;
 
@@ -217,8 +212,8 @@ def runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeN
  pool.close();
  pool.join(); 
  command='rm '+ outputs_folder + 'samtools_results/*';
- os.system(command);
- return outputRecalBamFiles;
+ #os.system(command);
+ return outputRecalsortBamFiles;
  
 # MuTect to detect somatic mutation
 def runMUTECT2(gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,tumor_reads,normal_reads,tumor_f,normal_f,tumor_alt):
