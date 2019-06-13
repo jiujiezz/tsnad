@@ -99,7 +99,7 @@ TSNAD uses the following software and libraries:
 		cd ensembl-vep-release-*
 		perl INSTALL.pl
 	
-	download the API, download the cache 242 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for b37, download the cache 243 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for hg38.
+	download the API, download the cache 295 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for b37, download the cache 296 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for hg38.
 	
 	if it is not help, try following step:
 		
