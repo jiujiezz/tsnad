@@ -12,11 +12,11 @@ use strict;
 
 my $in=$ARGV[0]; #input mutect output file
 my $out=$ARGV[1]; #output filtered mutations
-my $tumor_reads_cutoff=$ARGV[3];
-my $normal_reads_cutoff=$ARGV[4];
-my $tumor_f_cutoff=$ARGV[5];
-my $normal_f_cutoff=$ARGV[6];
-my $tumor_alt_cutoff=$ARGV[7];
+my $tumor_reads_cutoff=$ARGV[2];
+my $normal_reads_cutoff=$ARGV[3];
+my $tumor_f_cutoff=$ARGV[4];
+my $normal_f_cutoff=$ARGV[5];
+my $tumor_alt_cutoff=$ARGV[6];
 
 open IN, "<$in" or die "cannot open $in:$!";
 open OUT, ">$out" or die "cannot open $out:$!";
