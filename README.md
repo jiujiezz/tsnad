@@ -7,6 +7,7 @@
  Version: 1.2  
  License: TSNAD is released under GNU license  
  System: Linux
+ Contact: zhanzhou@zju.edu.cn
 
 ## Introduction  
 
