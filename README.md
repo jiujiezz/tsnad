@@ -12,7 +12,41 @@
 
 An integrated software for cancer somatic mutation and tumour-specific neoantigen detection.  
 
-## Requirements
+## Installation and usage
+
+There are two ways to install TSNAD: 
+
+1. installed by docker without any other pre-installed tools (strongly recommand)
+
+2. installed by github with all required tools installed 
+
+### Installed by docker
+
+First, you need to install docker (https://docs.docker.com/)
+
+then, type the following code to install TSNAD:
+
+	docker pull wujingcheng/tsnad:v2.0
+
+it may take several hours to download because of the large size.
+
+### usage by docker 
+
+You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to provide): 
+	
+	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results wujingcheng/tsnad:v2.0 /bin/bash	
+	
+type the following command then the prediction of neoantigen from WES/WGS would start:
+
+	cd /home/tsnad
+	
+	python TSNAD.py -I samples/ -R RNA-seq/ -V [grch37/grch38] -O results/
+
+All results would be stored in the folder results/, and the final results of neoantigen are stored in the results/deephlapan_results/
+
+### Installed by github
+
+#### Requirements
 TSNAD uses the following software and libraries:  
   	
 1. Trimmomatic  (In Tools/)  
@@ -31,7 +65,7 @@ TSNAD uses the following software and libraries:
   
 1-10 tools are better put in the folder Tools/.   
 
-## Installation of each module
+#### Installation of each module
 1. Trimmomatic   
 
 		unzip Trimmomatic-*.zip
