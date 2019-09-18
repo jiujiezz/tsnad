@@ -30,9 +30,11 @@ then, type the following code to install TSNAD:
 
 it may take several hours to download because of the large size.
 
-### usage by docker 
+### Usage by docker 
 
-You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to provide): 
+You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to 
+
+provide): 
 	
 	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results wujingcheng/tsnad:v2.0 /bin/bash	
 	
@@ -58,10 +60,12 @@ TSNAD uses the following software and libraries:
 7. stringtie  (In Tools/)
 8. SOAP-HLA (for b37, in Tools/)
 9. kourami  (for hg38, in Tools/)
-10. NetMHCpan4.0  (In Tools/)
-11. JAVA     
-12. Python    
-13. Perl   
+10. STAR 
+11. arriba
+12. deephlapan 
+13. JAVA     
+14. Python    
+15. Perl   
   
 1-10 tools are better put in the folder Tools/.   
 
