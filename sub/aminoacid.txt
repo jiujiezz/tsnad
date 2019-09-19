@@ -1,0 +1,22 @@
+G	hydrophilic
+A	hydrophobic
+V	hydrophobic
+L	hydrophobic
+I	hydrophobic
+F	hydrophobic
+W	hydrophobic
+Y	hydrophilic
+D	acidic
+H	basic
+N	hydrophilic
+E	acidic
+K	basic
+Q	hydrophilic
+M	hydrophobic
+R	basic
+S	hydrophilic
+T	hydrophilic
+C	hydrophilic
+P	hydrophobic
+X	
+fs	
