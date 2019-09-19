@@ -194,15 +194,29 @@ TSNAD uses the following software and libraries:
 		scripts/download_grch38.sh hs38NoAltDH
 		bwa index resources/hs38DH.fa
 		bwa index resources/hs38NoAltDH.fa
-		
-10. NetMHCpan4.0 
-		
-		unzip netMHCpan-4.0.zip
-		cd netMHCpan-4.0
-		vim netMHCpan
-		
- 	change the *full path* and *tmpdir path* to your own path.
 
+10. STAR
+		
+		unzip STAR-master.zip
+		cd STAR-master/source
+		make STAR
+		
+		The necessary files for grch37
+		wget  ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
+		
+		The necessary files for grch38
+		wget  ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.annotation.gtf.gz
+
+11. Arriba
+
+		tar -xvf arriba_v1.1.0.tar.gz
+		cd arriba_v1.1.0 && make
+
+12.DeepHLApan
+
+		unzip deephlapan.zip
+		cd deephlapan
+		python setup.py install
 
 ## Usage  
 
@@ -272,11 +286,16 @@ then
 	python antigen_predicting_pipeline.py
 
 ## Update log
+### v2.0
+1. provide the neoantigen prediction from indel and gene fusion
+2. replace NetMHCpan with DeepHLApan
+3. provide the docker version of TSNAD
+4. provide the web-service of TSNAD (http://biopharm.zju.edu.cn/tsnad/)
 
-### V1.0 
-2017.4
-1. GUI for neoantigen prediction  
-2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
+### V1.2
+2019.5
+1. VEP v94 -> v96
+2. Add the selection of hg38 when calling mutations.
 
 ### V1.1
 2018.11
@@ -289,9 +308,10 @@ then
 7. NetMHCpan v2.8 -> v4.0
 8. Add the function of RNA-seq analysis for neoantigen filter.
 
-### V1.2
-2019.5
-1. VEP v94 -> v96
-2. Add the selection of hg38 when calling mutations.
+### V1.0 
+2017.4
+1. GUI for neoantigen prediction  
+2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
+
 
  
