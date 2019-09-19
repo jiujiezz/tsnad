@@ -60,8 +60,8 @@ TSNAD uses the following software and libraries:
 7. stringtie  (In Tools/)
 8. SOAP-HLA (for b37, in Tools/)
 9. kourami  (for hg38, in Tools/)
-10. STAR 
-11. arriba
+10. STAR (In Tools/)
+11. arriba (In Tools/)
 12. deephlapan 
 13. JAVA     
 14. Python    
