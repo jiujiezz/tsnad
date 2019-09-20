@@ -32,9 +32,7 @@ it may take several hours to download because of the large size.
 
 ### Usage by docker 
 
-You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to 
-
-provide): 
+You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to provide): 
 	
 	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results wujingcheng/tsnad:v2.0 /bin/bash	
 	
