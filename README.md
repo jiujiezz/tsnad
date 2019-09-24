@@ -16,9 +16,9 @@ An integrated software for cancer somatic mutation and tumour-specific neoantige
 
 There are two ways to install TSNAD: 
 
-1. installed by docker without any other pre-installed tools (strongly recommand)
+1. installed by docker without any other pre-installed tools (strongly recommand, can be used both in linux and windows)
 
-2. installed by github with all required tools installed 
+2. installed by github with all required tools installed (only can be used in linux)
 
 ### Installed by docker
 
