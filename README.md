@@ -218,32 +218,21 @@ TSNAD uses the following software and libraries:
 
 ## Usage  
 
-1. configure the file *somatic_mutation_detecting_parameters.config* ,replace the folder path in your own.  
+1. configure the file in the directory */config*, take grch38 as example:
 
-All the input data should end with 'fastq.gz'.
-
-The *RNA_seq_folder* must be empty if you don't have RNA-seq data.  
-
-*hisat2_folder* and *stringtie_tool* are used for RNA-seq analysis. 
-
-
-		version_of_hg hg38
-		trimmomatic_tool /media/biopharm/data1/TSNAD_update-master/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
-		bwa_folder /media/biopharm/data1/TSNAD_update-master/Tools/bwa-0.7.17/
-		samtools_folder /media/biopharm/data1/TSNAD_update-master/Tools/samtools-1.9/
-		gatk_tool /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
-		VEP_folder /media/biopharm/data1/TSNAD_update-master/Tools/ensembl-vep-release-96/
-		hisat2_folder /media/biopharm/data1/TSNAD_update-master/Tools/hisat2-2.1.0/
-		stringtie_tool /media/biopharm/data1/TSNAD_update-master/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
-		soaphla_folder /media/biopharm/data1/TSNAD_update-master/Tools/SOAP-HLA/
-		kourami_folder  /media/biopharm/data1/TSNAD_update-master/Tools/kourami/
-		inputs_folder /home/biopharm/renjianan/
-		RNA_seq_folder /media/biopharm/data2/NAJ_data/Lab_RNA-seq/S0517021701/
-		outputs_folder /media/biopharm/data1/TSNAD_update-master/results/
-		ref_human_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/Homo_sapiens_assembly38.fasta
-		ref_1000G_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
-		ref_Mills_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
-		ref_dbsnp_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38_adj.vcf
+		trimmomatic_tool /notebooks/tsnad/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
+		bwa_folder /notebooks/tsnad/Tools/bwa-0.7.17/
+		samtools_folder /notebooks/tsnad/Tools/samtools-1.9/
+		gatk_tool /notebooks/tsnad/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
+		VEP_folder /notebooks/tsnad/Tools/ensembl-vep/
+		hisat2_folder /notebooks/tsnad/Tools/hisat2-2.1.0/
+		stringtie_tool /notebooks/tsnad/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
+		soaphla_folder /notebooks/tsnad/Tools/SOAP-HLA/
+		kourami_folder  /notebooks/tsnad/Tools/kourami/
+		ref_human_file /notebooks/tsnad/Tools/gatk-4.0.11.0/hg38/Homo_sapiens_assembly38.fasta
+		ref_1000G_file /notebooks/tsnad/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
+		ref_Mills_file /notebooks/tsnad/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
+		ref_dbsnp_file /notebooks/tsnad/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38_adj.vcf
 		headcrop 10
 		leading 3
 		minlen 35
@@ -259,29 +248,37 @@ The *RNA_seq_folder* must be empty if you don't have RNA-seq data.
 		typeNum 2
 		laneNum 1
 		partNum 2
+
+replace the path of each tool or reference file in your own. The other parameters from *headcrop* to *partNum* should not be changed if 
+
+you don't know their meanings.
+
+2. After configuration, return to the path where *TSNAD.py* located:
+
+		python TSNAD.py -I [dir of WES/WGS] -R [dir of RNA-seq] -V [grch37/grch38] -O [dir of outputs]
+
+
+## The meaning of parameters in config file
+headcrop: Cut the specified number of bases from the start of the read, default 10, used by *trimmomatic*
+leading: Cut bases off the start of a read, if below a threshold quality,default 3, used by *trimmomatic*
+minlen: Drop the read if it is below a specified length, default 35, used by *trimmomatic*
+slidingwindow: Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold, default 4:15, used by *trimmomatic*
+normal_f: The maximum fraction of single nucleotide variant in normal sample, default 0, used for somatic mutation filtering.
+normal_reads: The minimum number of sequence reads in normal sample, default 6, used for somatic mutation filtering.
+tumor_alt: The minimum number of single nucleotide variant in tumor sample, default 5, used for somatic mutation filtering.
+tumor_f: The minimum fraction of single nucleotide variant in tumor sample, default 0.05, used for somatic mutation filtering.
+tumor_reads: The minimum number of sequence reads in tumor sample, default 10, used for somatic mutation filtering.
+typeNum: The number of types of input files(i.e. tumor and normal:2, tumor only :1), default:2. In this tool, it's always 2.
+laneNum: The number of lanes when sequencing, default:1.
+partNum: single-read sequencing:1, paired-end sequencing:2, default:2.
+
+As the default parameters, the input WGS/WES files in the input directory should be 
 		
-
-then 
-
-	python  somatic_mutation_detecting_pipeline.py
-
-2. configure the file *antigen_predicting_parameters.config* ,
-
-		version_of_hg hg38
-		A1 02:01
-		A2 02:01
-		B1 27:05
-		B2 15:18
-		C1 07:04
-		C2 02:02
-		Input_file /media/biopharm/data1/TSNAD_update-master/results/vep_results/mutect_call_adj_vep_filtered.txt
-		Outputs_folder /media/biopharm/data1/TSNAD_update-master/results/netmhcpan_results/
-		netMHCpan_folder /media/biopharm/data1/TSNAD_update-master/Tools/netMHCpan-4.0/
-		peptide_length 8,9,10,11
-
-then 
-
-	python antigen_predicting_pipeline.py
+		normal_L1_R1.fastq
+		normal_L1_R2.fastq
+		tumor_L2_R1.fastq
+		tumor_L2_R2.fastq
+		
 
 ## Update log
 ### v2.0
