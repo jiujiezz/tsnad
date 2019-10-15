@@ -56,8 +56,8 @@ TSNAD uses the following software and libraries:
 5. [VEP](https://github.com/Ensembl/ensembl-vep/archive/release/96.zip)   
 6. [hisat2](http://ccb.jhu.edu/software/hisat2/dl/hisat2-2.1.0-Linux_x86_64.zip)   
 7. stringtie  (In Tools/)
-8. SOAP-HLA (for b37, in Tools/)
-9. kourami  (for hg38, in Tools/)
+8. SOAP-HLA (for grch37, in Tools/)
+9. kourami  (for grch38, in Tools/)
 10. STAR (In Tools/)
 11. arriba (In Tools/)
 12. deephlapan 
@@ -94,7 +94,7 @@ TSNAD uses the following software and libraries:
 		unzip gatk-*.zip
 		sudo apt install openjdk-8-jdk-headless
 		
-		The necessary files for b37
+		The necessary files for grch37
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/1000G_phase1.snps.high_confidence.b37.vcf.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/1000G_phase1.snps.high_confidence.b37.vcf.idx.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/dbsnp_138.b37.vcf.gz
@@ -111,7 +111,7 @@ TSNAD uses the following software and libraries:
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/human_g1k_v37.2bit.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/human_g1k_v37.dict.gz
 		
-		The necessary files for hg38
+		The necessary files for grch38
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz.tbi
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/dbsnp_146.hg38.vcf.gz
@@ -135,7 +135,7 @@ TSNAD uses the following software and libraries:
 		cd ensembl-vep-release-*
 		perl INSTALL.pl
 	
-	download the API, download the cache 295 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for b37, download the cache 296 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for hg38.
+	download the API, download the cache 295 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for grch37, download the cache 296 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for grch38.
 	
 	if it is not help, try following step:
 		
@@ -163,13 +163,13 @@ TSNAD uses the following software and libraries:
 		unzip hisat2-*.zip
 		cd hisat2-*
 		
-		The necessary files for b37
+		The necessary files for grch37
 		wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch37.tar.gz 
 		wget ftp://ftp.ensembl.org/pub/grch37/release-96/gtf/homo_sapiens/Homo_sapiens.GRCh37.87.gtf.gz
 		tar -xvf grch37.tar.gz
 		gunzip Homo_sapiens.GRCh37.87.gtf.gz -d
 		
-		The necessary files for hg38
+		The necessary files for grch38
 		wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38.tar.gz
 		wget ftp://ftp.ensembl.org/pub/release-96/gtf/homo_sapiens/Homo_sapiens.GRCh38.96.gtf.gz
 		tar -xvf grch38.tar.gz
@@ -220,19 +220,21 @@ TSNAD uses the following software and libraries:
 
 1. configure the file in the directory */config*, take grch38 as example:
 
-		trimmomatic_tool /notebooks/tsnad/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
-		bwa_folder /notebooks/tsnad/Tools/bwa-0.7.17/
-		samtools_folder /notebooks/tsnad/Tools/samtools-1.9/
-		gatk_tool /notebooks/tsnad/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
-		VEP_folder /notebooks/tsnad/Tools/ensembl-vep/
-		hisat2_folder /notebooks/tsnad/Tools/hisat2-2.1.0/
-		stringtie_tool /notebooks/tsnad/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
-		soaphla_folder /notebooks/tsnad/Tools/SOAP-HLA/
-		kourami_folder  /notebooks/tsnad/Tools/kourami/
-		ref_human_file /notebooks/tsnad/Tools/gatk-4.0.11.0/hg38/Homo_sapiens_assembly38.fasta
-		ref_1000G_file /notebooks/tsnad/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
-		ref_Mills_file /notebooks/tsnad/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
-		ref_dbsnp_file /notebooks/tsnad/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38_adj.vcf
+		trimmomatic_tool /home/tsnad/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
+		bwa_folder /home/tsnad/Tools/bwa-0.7.17/
+		samtools_folder /home/tsnad/Tools/samtools-1.9/
+		gatk_tool /home/tsnad/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
+		VEP_folder /home/tsnad/Tools/ensembl-vep/
+		hisat2_folder /home/tsnad/Tools/hisat2-2.1.0/
+		stringtie_tool /home/tsnad/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
+		soaphla_folder /home/tsnad/Tools/SOAP-HLA/
+		kourami_folder  /home/tsnad/Tools/kourami-master/
+		star_folder     /home/tsnad/Tools/STAR/
+		arriba_folder     /home/tsnad/Tools/arriba_v1.1.0/
+		ref_human_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/Homo_sapiens_assembly38.fasta
+		ref_1000G_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
+		ref_Mills_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
+		ref_dbsnp_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38_adj.vcf
 		headcrop 10
 		leading 3
 		minlen 35
