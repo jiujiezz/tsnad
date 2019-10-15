@@ -2,7 +2,7 @@
  
  Neoantigen prediction from WGS or WES.    
    
- Authors: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren  
+ Authors: Zhan Zhou, Jingcheng Wu, Xingzheng Lyu, Jianan Ren  
  Date: Sep 2019  
  Version: 2.0  
  License: TSNAD is released under GNU license  
