@@ -261,25 +261,25 @@ you don't know their meanings.
 
 
 ## The meaning of parameters in config file
-headcrop: Cut the specified number of bases from the start of the read, default 10, used by *trimmomatic*  
-leading: Cut bases off the start of a read, if below a threshold quality,default 3, used by *trimmomatic*  
-minlen: Drop the read if it is below a specified length, default 35, used by *trimmomatic*  
-slidingwindow: Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold, default 4:15, used by *trimmomatic*  
-normal_f: The maximum fraction of single nucleotide variant in normal sample, default 0, used for somatic mutation filtering.  
-normal_reads: The minimum number of sequence reads in normal sample, default 6, used for somatic mutation filtering.  
-tumor_alt: The minimum number of single nucleotide variant in tumor sample, default 5, used for somatic mutation filtering.  
-tumor_f: The minimum fraction of single nucleotide variant in tumor sample, default 0.05, used for somatic mutation filtering.  
-tumor_reads: The minimum number of sequence reads in tumor sample, default 10, used for somatic mutation filtering.  
-typeNum: The number of types of input files(i.e. tumor and normal:2, tumor only :1), default:2. In this tool, it's always 2.  
-laneNum: The number of lanes when sequencing, default:1.  
-partNum: single-read sequencing:1, paired-end sequencing:2, default:2.  
+**headcrop**: 		Cut the specified number of bases from the start of the read, default 10, used by *trimmomatic*  
+**leading**: 		Cut bases off the start of a read, if below a threshold quality,default 3, used by *trimmomatic*  
+**minlen**: 		Drop the read if it is below a specified length, default 35, used by *trimmomatic*  
+**slidingwindow**: 	Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold, 				default 4:15, used by *trimmomatic*  
+**normal_f**: 		The maximum fraction of single nucleotide variant in normal sample, default 0, used for somatic mutation 				filtering.  
+**normal_reads**:	The minimum number of sequence reads in normal sample, default 6, used for somatic mutation filtering.  
+**tumor_alt**: 		The minimum number of single nucleotide variant in tumor sample, default 5, used for somatic mutation filtering. 
+**tumor_f**: 		The minimum fraction of single nucleotide variant in tumor sample, default 0.05, used for somatic mutation 				filtering.  
+**tumor_reads**: 	The minimum number of sequence reads in tumor sample, default 10, used for somatic mutation filtering.  
+**typeNum**: 		The number of types of input files(i.e. tumor and normal:2, tumor only :1), default:2. In this tool, it's always 			 2.  
+**laneNum**: 		The number of lanes when sequencing, default:1.  
+**partNum**: 		Single-read sequencing:1, paired-end sequencing:2, default:2.  
 
 As the default parameters, the input WGS/WES files in the input directory should be 
 		
-		normal_L1_R1.fastq
-		normal_L1_R2.fastq
-		tumor_L2_R1.fastq
-		tumor_L2_R2.fastq
+		normal_L1_R1.fastq.gz
+		normal_L1_R2.fastq.gz
+		tumor_L2_R1.fastq.gz
+		tumor_L2_R2.fastq.gz
 		
 
 ## Update log
