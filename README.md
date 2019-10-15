@@ -3,8 +3,8 @@
  Neoantigen prediction from WGS or WES.    
    
  Authors: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren  
- Date: May 2019  
- Version: 1.2  
+ Date: Sep 2019  
+ Version: 2.0  
  License: TSNAD is released under GNU license  
  System: Linux
  Contact: zhanzhou@zju.edu.cn
@@ -13,7 +13,41 @@
 
 An integrated software for cancer somatic mutation and tumour-specific neoantigen detection.  
 
-## Requirements
+## Installation and usage
+
+There are two ways to install TSNAD: 
+
+1. installed by docker without any other pre-installed tools (**strongly recommand**, can be used both in linux and windows)
+
+2. installed by github with all required tools installed (only can be used in linux)
+
+### Installed by docker
+
+First, you need to install docker (https://docs.docker.com/)
+
+then, type the following code to install TSNAD:
+
+	docker pull wujingcheng/tsnad:v2.0
+
+it may take several hours to download because of the large size.
+
+### Usage by docker 
+
+You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to provide): 
+	
+	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results wujingcheng/tsnad:v2.0 /bin/bash	
+	
+type the following command then the prediction of neoantigen from WES/WGS would start:
+
+	cd /home/tsnad
+	
+	python TSNAD.py -I samples/ -R RNA-seq/ -V [grch37/grch38] -O results/
+
+All results would be stored in the folder results/, and the final results of neoantigen are stored in the results/deephlapan_results/
+
+### Installed by github
+
+#### Requirements
 TSNAD uses the following software and libraries:  
   	
 1. Trimmomatic  (In Tools/)  
@@ -23,16 +57,18 @@ TSNAD uses the following software and libraries:
 5. [VEP](https://github.com/Ensembl/ensembl-vep/archive/release/96.zip)   
 6. [hisat2](http://ccb.jhu.edu/software/hisat2/dl/hisat2-2.1.0-Linux_x86_64.zip)   
 7. stringtie  (In Tools/)
-8. SOAP-HLA (for b37, in Tools/)
-9. kourami  (for hg38, in Tools/)
-10. NetMHCpan4.0  (In Tools/)
-11. JAVA     
-12. Python    
-13. Perl   
+8. SOAP-HLA (for grch37, in Tools/)
+9. kourami  (for grch38, in Tools/)
+10. STAR (In Tools/)
+11. arriba (In Tools/)
+12. deephlapan 
+13. JAVA     
+14. Python    
+15. Perl   
   
 1-10 tools are better put in the folder Tools/.   
 
-## Installation of each module
+#### Installation of each module
 1. Trimmomatic   
 
 		unzip Trimmomatic-*.zip
@@ -59,7 +95,7 @@ TSNAD uses the following software and libraries:
 		unzip gatk-*.zip
 		sudo apt install openjdk-8-jdk-headless
 		
-		The necessary files for b37
+		The necessary files for grch37
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/1000G_phase1.snps.high_confidence.b37.vcf.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/1000G_phase1.snps.high_confidence.b37.vcf.idx.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/dbsnp_138.b37.vcf.gz
@@ -76,7 +112,7 @@ TSNAD uses the following software and libraries:
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/human_g1k_v37.2bit.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/b37/human_g1k_v37.dict.gz
 		
-		The necessary files for hg38
+		The necessary files for grch38
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz.tbi
 		wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/dbsnp_146.hg38.vcf.gz
@@ -100,7 +136,7 @@ TSNAD uses the following software and libraries:
 		cd ensembl-vep-release-*
 		perl INSTALL.pl
 	
-	download the API, download the cache 242 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for b37, download the cache 243 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for hg38.
+	download the API, download the cache 295 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for grch37, download the cache 296 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for grch38.
 	
 	if it is not help, try following step:
 		
@@ -128,13 +164,13 @@ TSNAD uses the following software and libraries:
 		unzip hisat2-*.zip
 		cd hisat2-*
 		
-		The necessary files for b37
+		The necessary files for grch37
 		wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch37.tar.gz 
 		wget ftp://ftp.ensembl.org/pub/grch37/release-96/gtf/homo_sapiens/Homo_sapiens.GRCh37.87.gtf.gz
 		tar -xvf grch37.tar.gz
 		gunzip Homo_sapiens.GRCh37.87.gtf.gz -d
 		
-		The necessary files for hg38
+		The necessary files for grch38
 		wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38.tar.gz
 		wget ftp://ftp.ensembl.org/pub/release-96/gtf/homo_sapiens/Homo_sapiens.GRCh38.96.gtf.gz
 		tar -xvf grch38.tar.gz
@@ -157,44 +193,49 @@ TSNAD uses the following software and libraries:
 		scripts/download_grch38.sh hs38NoAltDH
 		bwa index resources/hs38DH.fa
 		bwa index resources/hs38NoAltDH.fa
-		
-10. NetMHCpan4.0 
-		
-		unzip netMHCpan-4.0.zip
-		cd netMHCpan-4.0
-		vim netMHCpan
-		
- 	change the *full path* and *tmpdir path* to your own path.
 
+10. STAR
+		
+		unzip STAR-master.zip
+		cd STAR-master/source
+		make STAR
+		
+		The necessary files for grch37
+		wget  ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
+		
+		The necessary files for grch38
+		wget  ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.annotation.gtf.gz
+
+11. Arriba
+
+		tar -xvf arriba_v1.1.0.tar.gz
+		cd arriba_v1.1.0 && make
+
+12.DeepHLApan
+
+		unzip deephlapan.zip
+		cd deephlapan
+		python setup.py install
 
 ## Usage  
 
-1. configure the file *somatic_mutation_detecting_parameters.config* ,replace the folder path in your own.  
+1. configure the file in the directory */config*, take grch38 as example:
 
-All the input data should end with 'fastq.gz'.
-
-The *RNA_seq_folder* must be empty if you don't have RNA-seq data.  
-
-*hisat2_folder* and *stringtie_tool* are used for RNA-seq analysis. 
-
-
-		version_of_hg hg38
-		trimmomatic_tool /media/biopharm/data1/TSNAD_update-master/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
-		bwa_folder /media/biopharm/data1/TSNAD_update-master/Tools/bwa-0.7.17/
-		samtools_folder /media/biopharm/data1/TSNAD_update-master/Tools/samtools-1.9/
-		gatk_tool /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
-		VEP_folder /media/biopharm/data1/TSNAD_update-master/Tools/ensembl-vep-release-96/
-		hisat2_folder /media/biopharm/data1/TSNAD_update-master/Tools/hisat2-2.1.0/
-		stringtie_tool /media/biopharm/data1/TSNAD_update-master/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
-		soaphla_folder /media/biopharm/data1/TSNAD_update-master/Tools/SOAP-HLA/
-		kourami_folder  /media/biopharm/data1/TSNAD_update-master/Tools/kourami/
-		inputs_folder /home/biopharm/renjianan/
-		RNA_seq_folder /media/biopharm/data2/NAJ_data/Lab_RNA-seq/S0517021701/
-		outputs_folder /media/biopharm/data1/TSNAD_update-master/results/
-		ref_human_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/Homo_sapiens_assembly38.fasta
-		ref_1000G_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
-		ref_Mills_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
-		ref_dbsnp_file /media/biopharm/data1/TSNAD_update-master/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38_adj.vcf
+		trimmomatic_tool /home/tsnad/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
+		bwa_folder /home/tsnad/Tools/bwa-0.7.17/
+		samtools_folder /home/tsnad/Tools/samtools-1.9/
+		gatk_tool /home/tsnad/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
+		VEP_folder /home/tsnad/Tools/ensembl-vep/
+		hisat2_folder /home/tsnad/Tools/hisat2-2.1.0/
+		stringtie_tool /home/tsnad/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
+		soaphla_folder /home/tsnad/Tools/SOAP-HLA/
+		kourami_folder  /home/tsnad/Tools/kourami-master/
+		star_folder     /home/tsnad/Tools/STAR/
+		arriba_folder     /home/tsnad/Tools/arriba_v1.1.0/
+		ref_human_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/Homo_sapiens_assembly38.fasta
+		ref_1000G_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
+		ref_Mills_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
+		ref_dbsnp_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38_adj.vcf
 		headcrop 10
 		leading 3
 		minlen 35
@@ -210,36 +251,49 @@ The *RNA_seq_folder* must be empty if you don't have RNA-seq data.
 		typeNum 2
 		laneNum 1
 		partNum 2
+
+replace the path of each tool or reference file in your own. The other parameters from *headcrop* to *partNum* should not be changed if 
+
+you don't know their meanings.
+
+2. After configuration, return to the path where *TSNAD.py* located:
+
+		python TSNAD.py -I [dir of WES/WGS] -R [dir of RNA-seq] -V [grch37/grch38] -O [dir of outputs]
+
+
+## The meaning of parameters in config file
+headcrop: Cut the specified number of bases from the start of the read, default 10, used by *trimmomatic*  
+leading: Cut bases off the start of a read, if below a threshold quality,default 3, used by *trimmomatic*  
+minlen: Drop the read if it is below a specified length, default 35, used by *trimmomatic*  
+slidingwindow: Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold, default 4:15, used by *trimmomatic*  
+normal_f: The maximum fraction of single nucleotide variant in normal sample, default 0, used for somatic mutation filtering.  
+normal_reads: The minimum number of sequence reads in normal sample, default 6, used for somatic mutation filtering.  
+tumor_alt: The minimum number of single nucleotide variant in tumor sample, default 5, used for somatic mutation filtering.  
+tumor_f: The minimum fraction of single nucleotide variant in tumor sample, default 0.05, used for somatic mutation filtering.  
+tumor_reads: The minimum number of sequence reads in tumor sample, default 10, used for somatic mutation filtering.  
+typeNum: The number of types of input files(i.e. tumor and normal:2, tumor only :1), default:2. In this tool, it's always 2.  
+laneNum: The number of lanes when sequencing, default:1.  
+partNum: single-read sequencing:1, paired-end sequencing:2, default:2.  
+
+As the default parameters, the input WGS/WES files in the input directory should be 
+		
+		normal_L1_R1.fastq
+		normal_L1_R2.fastq
+		tumor_L2_R1.fastq
+		tumor_L2_R2.fastq
 		
 
-then 
-
-	python  somatic_mutation_detecting_pipeline.py
-
-2. configure the file *antigen_predicting_parameters.config* ,
-
-		version_of_hg hg38
-		A1 02:01
-		A2 02:01
-		B1 27:05
-		B2 15:18
-		C1 07:04
-		C2 02:02
-		Input_file /media/biopharm/data1/TSNAD_update-master/results/vep_results/mutect_call_adj_vep_filtered.txt
-		Outputs_folder /media/biopharm/data1/TSNAD_update-master/results/netmhcpan_results/
-		netMHCpan_folder /media/biopharm/data1/TSNAD_update-master/Tools/netMHCpan-4.0/
-		peptide_length 8,9,10,11
-
-then 
-
-	python antigen_predicting_pipeline.py
-
 ## Update log
+### v2.0
+1. provide the neoantigen prediction from indel and gene fusion
+2. replace NetMHCpan with DeepHLApan
+3. provide the docker version of TSNAD
+4. provide the web-service of TSNAD (http://biopharm.zju.edu.cn/tsnad/)
 
-### V1.0 
-2017.4
-1. GUI for neoantigen prediction  
-2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
+### V1.2
+2019.5
+1. VEP v94 -> v96
+2. Add the selection of hg38 when calling mutations.
 
 ### V1.1
 2018.11
@@ -252,9 +306,10 @@ then
 7. NetMHCpan v2.8 -> v4.0
 8. Add the function of RNA-seq analysis for neoantigen filter.
 
-### V1.2
-2019.5
-1. VEP v94 -> v96
-2. Add the selection of hg38 when calling mutations.
+### V1.0 
+2017.4
+1. GUI for neoantigen prediction  
+2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
+
 
  
