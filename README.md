@@ -1,6 +1,6 @@
 # TSNAD
  
- Neoantigen prediction from WGS or WES.    
+ An integrated pipeline for neoantigen prediction from WGS or WES.    
    
  Authors: Zhan Zhou, Jingcheng Wu, Xingzheng Lyu, Jianan Ren  
  Date: Sep 2019  
