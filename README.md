@@ -216,7 +216,7 @@ TSNAD uses the following software and libraries:
 		cd deephlapan
 		python setup.py install
 
-## Usage  
+### Usage by github  
 
 1. configure the file in the directory */config*, take grch38 as example:
 
@@ -276,23 +276,24 @@ you don't know their meanings.
 
 As the default parameters, the input WGS/WES files in the input directory should be 
 		
-		normal_L1_R1.fastq.gz
-		normal_L1_R2.fastq.gz
-		tumor_L2_R1.fastq.gz
-		tumor_L2_R2.fastq.gz
+		[normal_L1_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R1.fastq.gz)
+		[normal_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R2.fastq.gz)
+		[tumor_L2_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R1.fastq.gz)
+		[tumor_L2_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R2.fastq.gz)
 		
 
 ## Update log
 ### v2.0
+2019.09
 1. provide the neoantigen prediction from indel and gene fusion
 2. replace NetMHCpan with DeepHLApan
 3. provide the docker version of TSNAD
 4. provide the web-service of TSNAD (http://biopharm.zju.edu.cn/tsnad/)
 
 ### V1.2
-2019.5
+2019.05
 1. VEP v94 -> v96
-2. Add the selection of hg38 when calling mutations.
+2. Add the selection of grch38 when calling mutations.
 
 ### V1.1
 2018.11
@@ -306,7 +307,7 @@ As the default parameters, the input WGS/WES files in the input directory should
 8. Add the function of RNA-seq analysis for neoantigen filter.
 
 ### V1.0 
-2017.4
+2017.04
 1. GUI for neoantigen prediction  
 2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
 
