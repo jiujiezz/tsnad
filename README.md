@@ -251,9 +251,7 @@ TSNAD uses the following software and libraries:
 		laneNum 1
 		partNum 2
 
-replace the path of each tool or reference file in your own. The other parameters from *headcrop* to *partNum* should not be changed if 
-
-you don't know their meanings.
+replace the path of each tool or reference file in your own. The other parameters from *headcrop* to *partNum* should not be changed if you don't know their meanings.
 
 2. After configuration, return to the path where *TSNAD.py* located:
 
@@ -276,11 +274,11 @@ you don't know their meanings.
 
 As the default parameters, the input WGS/WES files in the input directory should be 
 		
-		[normal_L1_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R1.fastq.gz)
-		[normal_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R2.fastq.gz)
-		[tumor_L2_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R1.fastq.gz)
-		[tumor_L2_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R2.fastq.gz)
-		
+		normal_L1_R1.fastq.gz
+		normal_L1_R2.fastq.gz
+		tumor_L2_R1.fastq.gz
+		tumor_L2_R2.fastq.gz
+
 
 ## Update log
 ### v2.0
