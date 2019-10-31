@@ -281,12 +281,12 @@ As the default parameters, the input WGS/WES files in the input directory should
 
 The samples could be downloaded from following links:
 
-[normal_L1_R1.fastq.gz](http://biopharm.zju.edu.cn/normal_L1_R1.fastq.gz)
-[normal_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/normal_L1_R2.fastq.gz) 
-[tumor_L2_R1.fastq.gz](http://biopharm.zju.edu.cn/tumor_L2_R1.fastq.gz) 
-[tumor_L2_R2.fastq.gz](http://biopharm.zju.edu.cn/tumor_L2_R2.fastq.gz)
-[rna_L1_R1.fastq.gz](http://biopharm.zju.edu.cn/rna_L1_R1.fastq.gz) 
-[rna_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/rna_L1_R2.fastq.gz) 
+[normal_L1_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R1.fastq.gz)  
+[normal_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R2.fastq.gz)   
+[tumor_L2_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R1.fastq.gz)   
+[tumor_L2_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R2.fastq.gz)  
+[rna_L1_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/rna_L1_R1.fastq.gz)   
+[rna_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/rna_L1_R2.fastq.gz)   
 
 ## Update log
 ### v2.0
