@@ -281,7 +281,7 @@ As the default parameters, the input WGS/WES files in the input directory should
 
 The samples could be downloaded from following links:
 
-[normal_L1_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R1.fastq.gz)  
+[normal_L1_R1.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/ESIPVu3PkfpEopldu-Szu58BC39l0vqkLAzPOYXizjNMIA?e=cfWQMG)  
 [normal_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R2.fastq.gz)   
 [tumor_L2_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R1.fastq.gz)   
 [tumor_L2_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R2.fastq.gz)  
