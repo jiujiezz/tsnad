@@ -217,7 +217,7 @@ TSNAD uses the following software and libraries:
 		cd deephlapan
 		python setup.py install
 
-## Usage  
+### Usage by github  
 
 1. configure the file in the directory */config*, take grch38 as example:
 
@@ -252,9 +252,7 @@ TSNAD uses the following software and libraries:
 		laneNum 1
 		partNum 2
 
-replace the path of each tool or reference file in your own. The other parameters from *headcrop* to *partNum* should not be changed if 
-
-you don't know their meanings.
+replace the path of each tool or reference file in your own. The other parameters from *headcrop* to *partNum* should not be changed if you don't know their meanings.
 
 2. After configuration, return to the path where *TSNAD.py* located:
 
@@ -281,19 +279,28 @@ As the default parameters, the input WGS/WES files in the input directory should
 		normal_L1_R2.fastq.gz
 		tumor_L2_R1.fastq.gz
 		tumor_L2_R2.fastq.gz
-		
+
+The samples could be downloaded from following links:
+
+[normal_L1_R1.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VTZkdhdXJ2bnpKRWxkMG1uT2ZGQVdvQkc4YjZQZGI1MDlVUFZLMTc1N29CLUE/ZT1mSWZCRlg=.fastq.gz)  
+[normal_L1_R2.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VXbHprcEl0UkpKSmlRVW01Mkl3VDBVQmVRbzdGcmZqVHVsb0RheDZKUURxX1E/ZT1ZREc1UWw=.fastq.gz)   
+[tumor_L2_R1.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VZcm1fdElkTUVCR2xYeWw1TGRTQkprQnJnTzFicE0zUmFLamFleVRKOGo5M0E/ZT04clRlTjE=.fastq.gz)   
+[tumor_L2_R2.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VkaEo1dDNYZFo1TW45eU03ZWRSOEhnQjRobTNNeVVqQUQ0ODBBYlVBeDBtSVE/ZT1XQ3Nlams=.fastq.gz)  
+[rna_L1_R1.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VWX0w4ODFXb2tCSmtpRTZLOXNIcm1RQkg1Y1VjenpBYUdIWHhKd3BhQjZXZ0E/ZT1POFpBMG4=.fastq.gz)   
+[rna_L1_R2.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VTSVBWdTNQa2ZwRW9wbGR1LVN6dTU4Qmowb1QxVTNJLU16YV9KOEtvb3FyOGc/ZT1uc0Y1N2g=.fastq.gz)   
 
 ## Update log
 ### v2.0
+2019.09
 1. provide the neoantigen prediction from indel and gene fusion
 2. replace NetMHCpan with DeepHLApan
 3. provide the docker version of TSNAD
 4. provide the web-service of TSNAD (http://biopharm.zju.edu.cn/tsnad/)
 
 ### V1.2
-2019.5
+2019.05
 1. VEP v94 -> v96
-2. Add the selection of hg38 when calling mutations.
+2. Add the selection of grch38 when calling mutations.
 
 ### V1.1
 2018.11
@@ -307,7 +314,7 @@ As the default parameters, the input WGS/WES files in the input directory should
 8. Add the function of RNA-seq analysis for neoantigen filter.
 
 ### V1.0 
-2017.4
+2017.04
 1. GUI for neoantigen prediction  
 2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
 
