@@ -281,12 +281,12 @@ As the default parameters, the input WGS/WES files in the input directory should
 
 The samples could be downloaded from following links:
 
-[normal_L1_R1.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/ESIPVu3PkfpEopldu-Szu58BC39l0vqkLAzPOYXizjNMIA?e=cfWQMG)  
-[normal_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/normal_L1_R2.fastq.gz)   
-[tumor_L2_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R1.fastq.gz)   
-[tumor_L2_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/tumor_L2_R2.fastq.gz)  
-[rna_L1_R1.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/rna_L1_R1.fastq.gz)   
-[rna_L1_R2.fastq.gz](http://biopharm.zju.edu.cn/tsnad_samples/rna_L1_R2.fastq.gz)   
+[normal_L1_R1.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/ESfGaurvnzJEld0mnOfFAWoBG8b6Pdb509UPVK1757oB-A?e=SucfV9)  
+[normal_L1_R2.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/EWlzkpItRJJJiQUm52IwT0UBeQo7FrfjTuloDax6JQDq_Q?e=0mBAjx)   
+[tumor_L2_R1.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/EYrm_tIdMEBGlXyl5LdSBJkBrgO1bpM3RaKjaeyTJ8j93A?e=KNSNpm)   
+[tumor_L2_R2.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/EdhJ5t3XdZ5Mn9yM7edR8HgB2EGT968nnM1rr7MHW1LVuA?e=KBvU4e)  
+[rna_L1_R1.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/EV_L881WokBJkiE6K9sHrmQBH5cUczzAaGHXxJwpaB6WgA?e=HVg71B)   
+[rna_L1_R2.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/ESIPVu3PkfpEopldu-Szu58Bj0oT1U3I-Mza_J8Kooqr8g?e=nFbGAI)   
 
 ## Update log
 ### v2.0
