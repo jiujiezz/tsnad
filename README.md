@@ -281,12 +281,12 @@ As the default parameters, the input WGS/WES files in the input directory should
 
 The samples could be downloaded from following links:
 
-[normal_L1_R1.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/ESfGaurvnzJEld0mnOfFAWoBG8b6Pdb509UPVK1757oB-A?e=SucfV9)  
-[normal_L1_R2.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/EWlzkpItRJJJiQUm52IwT0UBeQo7FrfjTuloDax6JQDq_Q?e=0mBAjx)   
-[tumor_L2_R1.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/EYrm_tIdMEBGlXyl5LdSBJkBrgO1bpM3RaKjaeyTJ8j93A?e=KNSNpm)   
-[tumor_L2_R2.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/EdhJ5t3XdZ5Mn9yM7edR8HgB2EGT968nnM1rr7MHW1LVuA?e=KBvU4e)  
-[rna_L1_R1.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/EV_L881WokBJkiE6K9sHrmQBH5cUczzAaGHXxJwpaB6WgA?e=HVg71B)   
-[rna_L1_R2.fastq.gz](https://zjueducn-my.sharepoint.com/:u:/g/personal/biopharm_zju_edu_cn/ESIPVu3PkfpEopldu-Szu58Bj0oT1U3I-Mza_J8Kooqr8g?e=nFbGAI)   
+[normal_L1_R1.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VTZkdhdXJ2bnpKRWxkMG1uT2ZGQVdvQkc4YjZQZGI1MDlVUFZLMTc1N29CLUE/ZT1mSWZCRlg=.fastq.gz)  
+[normal_L1_R2.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VXbHprcEl0UkpKSmlRVW01Mkl3VDBVQmVRbzdGcmZqVHVsb0RheDZKUURxX1E/ZT1ZREc1UWw=.fastq.gz)   
+[tumor_L2_R1.fastq.gz](https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFodHRwczovL3pqdWVkdWNuLW15LnNoYXJlcG9pbnQuY29tLzp1Oi9nL3BlcnNvbmFsL2Jpb3BoYXJtX3pqdV9lZHVfY24vRVlybV90SWRNRUJHbFh5bDVMZFNCSmtCcmdPMWJwTTNSYUtqYWV5VEo4ajkzQT9lPUM5enZRaA==.fastq.gz)   
+[tumor_L2_R2.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VkaEo1dDNYZFo1TW45eU03ZWRSOEhnQjRobTNNeVVqQUQ0ODBBYlVBeDBtSVE/ZT1XQ3Nlams=.fastq.gz)  
+[rna_L1_R1.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VWX0w4ODFXb2tCSmtpRTZLOXNIcm1RQkg1Y1VjenpBYUdIWHhKd3BhQjZXZ0E/ZT1POFpBMG4=.fastq.gz)   
+[rna_L1_R2.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VTSVBWdTNQa2ZwRW9wbGR1LVN6dTU4Qmowb1QxVTNJLU16YV9KOEtvb3FyOGc/ZT1uc0Y1N2g=.fastq.gz)   
 
 ## Update log
 ### v2.0
