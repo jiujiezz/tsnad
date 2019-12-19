@@ -65,7 +65,7 @@ TSNAD uses the following software and libraries:
 14. Python    
 15. Perl   
   
-1-10 tools are better put in the folder Tools/.   
+1-12 tools are better put in the folder Tools/.   
 
 #### Installation of each module
 1. Trimmomatic   
@@ -135,7 +135,7 @@ TSNAD uses the following software and libraries:
 		cd ensembl-vep-release-*
 		perl INSTALL.pl
 	
-	download the API, download the cache 295 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for grch37, download the cache 296 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for grch38.
+	download the API, download the cache *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for grch37, download the cache *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for grch38.
 	
 	if it is not help, try following step:
 		
