@@ -27,7 +27,7 @@ First, you need to install docker (https://docs.docker.com/)
 
 then, type the following code to install TSNAD:
 
-	docker pull wujingcheng/tsnad:v2.0
+	docker pull biopharm/tsnad:v2.0
 
 it may take several hours to download because of the large size.
 
@@ -35,7 +35,7 @@ it may take several hours to download because of the large size.
 
 You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to provide): 
 	
-	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results wujingcheng/tsnad:v2.0 /bin/bash	
+	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results biopharm/tsnad:v2.0 /bin/bash	
 	
 type the following command then the prediction of neoantigen from WES/WGS would start:
 
@@ -66,7 +66,7 @@ TSNAD uses the following software and libraries:
 14. Python    
 15. Perl   
   
-1-10 tools are better put in the folder Tools/.   
+1-12 tools are better put in the folder Tools/.   
 
 #### Installation of each module
 1. Trimmomatic   
@@ -136,7 +136,7 @@ TSNAD uses the following software and libraries:
 		cd ensembl-vep-release-*
 		perl INSTALL.pl
 	
-	download the API, download the cache 295 *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for grch37, download the cache 296 *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for grch38.
+	download the API, download the cache *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for grch37, download the cache *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for grch38.
 	
 	if it is not help, try following step:
 		
