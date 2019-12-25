@@ -41,6 +41,8 @@ type the following command then the prediction of neoantigen from WES/WGS would 
 
 	cd /home/tsnad
 	
+	bash uncompress.sh
+	
 	python TSNAD.py -I samples/ -R RNA-seq/ -V [grch37/grch38] -O results/
 
 All results would be stored in the folder results/, and the final results of neoantigen are stored in the results/deephlapan_results/
