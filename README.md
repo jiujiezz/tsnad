@@ -230,7 +230,7 @@ TSNAD uses the following software and libraries:
 
 11. DeepHLApan
 
-		unzip deephlapan.zip
+		unzip deephlapan.zip -d deephlapan
 		cd deephlapan
 		python setup.py install
 
