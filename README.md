@@ -60,14 +60,14 @@ TSNAD uses the following software and libraries:
 6. [hisat2 2.2.1](https://cloud.biohpc.swmed.edu/index.php/s/oTtGWbWjaxsQ2Ho/download)   
 7. stringtie 2.1.6 (In Tools/)
 8. OptiType 1.3.5 (In Tools/)
-10. STAR 2.7 (In Tools/)
-11. arriba 1.1.0 (In Tools/)
-12. DeepHLApan 1.1 (In Tools/)
-13. JAVA 1.8    
-14. Python 2.7   
-15. Perl 5.22  
+9. STAR 2.7 (In Tools/)
+10. arriba 1.1.0 (In Tools/)
+11. DeepHLApan 1.1 (In Tools/)
+12. JAVA 1.8    
+13. Python 2.7   
+14. Perl 5.22  
   
-1-12 tools are better put in the folder Tools/.   
+1-11 tools are better put in the folder Tools/.   
 
 #### Installation of each module
 1. Trimmomatic   
