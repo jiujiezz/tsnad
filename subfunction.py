@@ -3,9 +3,9 @@
 # Version: TSNAD v2.0
 # File: subfunction.py
 # Python Version: 2.7.11
-# Finish time: Sep, 2019.
+# Finish time: July, 2021.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren
-# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2016-2021 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 # 
@@ -131,8 +131,8 @@ def runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,inputFiles,typeNum,lan
  pool.join();
  outputSamFiles = getFileList(outputs_folder+'bwa_results/','.sam');
  print "\nSub-process(es) done."
- command='rm '+ outputs_folder + 'trimmomatic_results/*';
- os.system(command)
+ #command='rm '+ outputs_folder + 'trimmomatic_results/*';
+ #os.system(command)
  return outputSamFiles;
  
 def runSAM(samtools_folder,gatk_tool,outputs_folder,inputfiles,typeNum,laneNum,threadNum):
@@ -251,32 +251,20 @@ def runVEP(vep_folder,outputs_folder,outputMutectVcfadjFiles,version_of_hg):
 
 
 # HLA Typing
-def runHLA(soaphla_folder,outputs_folder,inputFiles,typeNum):
+def runOptitype(Optitype_folder,outputs_folder,inputFiles,typeNum):
  pool = multiprocessing.Pool();
  print " Notes: Multi-processing is applied to speed up the data processing";
+ inputFiles.sort();
  for i in range(typeNum):
-   command = 'perl ' + soaphla_folder + 'MHC_autopipeline_b37.pl -i ' + inputFiles[i] + ' -od ' + str(outputs_folder+'soaphla_results/') + ' -v hg19';
+   p,f = os.path.split(inputFiles[i*2]);
+   file_name = f.split("_")[0];
+   command = 'python ' + Optitype_folder + '/OptiTypePipeline.py -i ' + inputFiles[i*2] + ' ' + inputFiles[i*2+1] + ' -d -o ' + str(outputs_folder+'Optitype_results/') + ' -p ' + file_name +' -v';
+   print command;
    pool.apply_async(multiprocess1,(inputFiles[i],command,));
  pool.close();
  pool.join();
  print "\nSub-process(es) done."
  return;
-
-def runkourami(kourami_folder,inputFiles,typeNum):
-    pool = multiprocessing.Pool();
-    print " Notes: Multi-processing is applied to speed up the data processing";
-    for i in range(typeNum):
-        p,f = os.path.split(inputFiles[i]);
-        file_name = f.split("_")[0];
-        os.chdir(p+'/../kourami_results/');
-        command1 = 'bash ' + kourami_folder + 'scripts/alignAndExtract_hs38DH.sh ' + file_name + ' ' + inputFiles[i];
-        command2 = 'java -jar ' + kourami_folder + 'target/Kourami.jar -d ' + kourami_folder + 'db/ -o ' + file_name + ' ' + file_name + '_on_KouramiPanel.bam';
-        os.system(command1)
-        os.system(command2)
-        os.chdir("/home/tsnad")
-        print "\nSub-process(es) done."
-    return;
-
 
 # RNA-seq analysis 
 def runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,outputs_folder,outputVEPFiles,version_of_hg):
@@ -321,13 +309,13 @@ def runarriba(RNA_seq_folder,star_folder,arriba_folder,kourami_folder,outputs_fo
     p,f = os.path.split(inputFile[0]);
     file_name = f.split("_")[0];
     if 'grch37' in version_of_hg:
-        command1 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --runMode genomeGenerate --genomeDir ' + star_folder + 'index_b37/ --genomeFastaFiles ' + kourami_folder + 'resources/GRCh37.p13.genome.fa' + ' --sjdbGTFfile ' + star_folder + 'gencode.v19.annotation.gtf --sjdbOverhang 100'
+        command1 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --runMode genomeGenerate --genomeDir ' + star_folder + 'index_b37/ --genomeFastaFiles ' + arriba_folder + 'database/GRCh37.p13.genome.fa' + ' --sjdbGTFfile ' + star_folder + 'gencode.v19.annotation.gtf --sjdbOverhang 100'
         command2 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --genomeDir ' + star_folder + 'index_b37/ --genomeLoad NoSharedMemory --readFilesIn ' + inputFile[0] + ' ' + inputFile[1] + ' --readFilesCommand zcat --outFileNamePrefix ' + outputs_folder + 'star_results/' + file_name + ' --outSAMtype BAM Unsorted --outSAMunmapped Within --outBAMcompression 0 --outFilterMultimapNmax 1 --outFilterMismatchNmax 3 --chimSegmentMin 10 --chimOutType WithinBAM SoftClip --chimJunctionOverhangMin 10 --chimScoreMin 1 --chimScoreDropMax 30 --chimScoreJunctionNonGTAG 0 --chimScoreSeparation 1 --alignSJstitchMismatchNmax 5 -1 5 5 --chimSegmentReadGapMax 3'
-        command3 = arriba_folder + 'arriba -x ' + outputs_folder + 'star_results/' + file_name + 'Aligned.out.bam -o ' +outputs_folder + 'arriba_results/' + file_name + '.tsv -a ' + kourami_folder + 'resources/GRCh37.p13.genome.fa'  + ' -g' + star_folder + 'gencode.v19.annotation.gtf -b ' + arriba_folder + 'database/blacklist_hg19_hs37d5_GRCh37_2018-11-04.tsv.gz -T -P'
+        command3 = arriba_folder + 'arriba -x ' + outputs_folder + 'star_results/' + file_name + 'Aligned.out.bam -o ' +outputs_folder + 'arriba_results/' + file_name + '.tsv -a ' + arriba_folder + 'database/GRCh37.p13.genome.fa'  + ' -g' + star_folder + 'gencode.v19.annotation.gtf -b ' + arriba_folder + 'database/blacklist_hg19_hs37d5_GRCh37_2018-11-04.tsv.gz -T -P'
     if 'grch38' in version_of_hg:
-        command1 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --runMode genomeGenerate --genomeDir ' + star_folder + 'index_hg38/ --genomeFastaFiles ' + kourami_folder + 'resources/hs38DH.fa' + ' --sjdbGTFfile ' + star_folder + 'gencode.v28.annotation.gtf --sjdbOverhang 100'
+        command1 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --runMode genomeGenerate --genomeDir ' + star_folder + 'index_hg38/ --genomeFastaFiles ' + kourami_folder + 'resources/hs38NoAltDH.fa' + ' --sjdbGTFfile ' + star_folder + 'gencode.v28.annotation.gtf --sjdbOverhang 100'
         command2 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --genomeDir ' + star_folder+ 'index_hg38/ --genomeLoad NoSharedMemory --readFilesIn ' + inputFile[0] + ' ' + inputFile[1] + ' --readFilesCommand zcat --outFileNamePrefix ' + outputs_folder + 'star_results/' + file_name + ' --outSAMtype BAM Unsorted --outSAMunmapped Within --outBAMcompression 0 --outFilterMultimapNmax 1 --outFilterMismatchNmax 3 --chimSegmentMin 10 --chimOutType WithinBAM SoftClip --chimJunctionOverhangMin 10 --chimScoreMin 1 --chimScoreDropMax 30 --chimScoreJunctionNonGTAG 0 --chimScoreSeparation 1 --alignSJstitchMismatchNmax 5 -1 5 5 --chimSegmentReadGapMax 3'
-        command3 = arriba_folder + 'arriba -x ' + outputs_folder + 'star_results/' + file_name + 'Aligned.out.bam -o ' + outputs_folder + 'arriba_results/' + file_name + '.tsv -a ' + kourami_folder + 'resources/hs38DH.fa' + ' -g ' + star_folder + 'gencode.v28.annotation.gtf -b ' + arriba_folder + 'database/blacklist_hg38_GRCh38_2018-11-04.tsv.gz -T -P'
+        command3 = arriba_folder + 'arriba -x ' + outputs_folder + 'star_results/' + file_name + 'Aligned.out.bam -o ' + outputs_folder + 'arriba_results/' + file_name + '.tsv -a ' + kourami_folder + 'resources/hs38NoAltDH.fa' + ' -g ' + star_folder + 'gencode.v28.annotation.gtf -b ' + arriba_folder + 'database/blacklist_hg38_GRCh38_2018-11-04.tsv.gz -T -P'
     print command1
     print command2
     print command3
