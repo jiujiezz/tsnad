@@ -1,4 +1,13 @@
-#!/usr/bin/perl-w
+#!/usr/bin/perl -w
+# ******************** Software Information *******************
+# Version: TSNAD v2.1
+# File: protein_mutation_filter_deephlapan.pl
+# Perl Version: 5.26.1
+# Latest time: July, 2021.
+# Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu
+# Copyright (C) 2016-2021 - College of Pharmaceutical Sciences, 
+#               Zhejiang University - All Rights Reserved 
+# *************************************************************
 #use strict;
 
 my $in=$ARGV[0];;
