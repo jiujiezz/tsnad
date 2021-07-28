@@ -1,11 +1,11 @@
 #!/usr/bin/perl-w
 # ******************** Software Information *******************
-# Version: TSNAD v2.0
+# Version: TSNAD v2.1
 # File: expression_filter.pl
 # Perl Version: 5.26.1
-# Finish time: Sep, 2019.
+# Finish time: July, 2021.
 # Developer: Jingcheng Wu, Zhan Zhou, Wenyi Zhao 
-# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2016-2021 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 use strict;
