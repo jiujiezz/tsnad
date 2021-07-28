@@ -152,8 +152,8 @@ TSNAD uses the following software and libraries:
 		wget https://cpan.metacpan.org/authors/id/C/CJ/CJFIELDS/BioPerl-1.6.924.tar.gz
 		tar -xvf ensembl-api.tar.gz
 		tar -xvf BioPerl-1.6.924.tar.gz
-		
-		PERL5LIB=${PERL5LIB}:${HOME}/src/bioperl-1.6.924
+
+		PERL5LIB=${PERL5LIB}:${HOME}/src/BioPerl-1.6.924
 		PERL5LIB=${PERL5LIB}:${HOME}/src/ensembl/modules
 		PERL5LIB=${PERL5LIB}:${HOME}/src/ensembl-compara/modules
 		PERL5LIB=${PERL5LIB}:${HOME}/src/ensembl-variation/modules
