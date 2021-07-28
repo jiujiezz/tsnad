@@ -309,20 +309,20 @@ The samples could be downloaded from following links:
 
 ### v2.1
 2021.07
-1. replace SOAP-HLA and Kourami to OptiType
+1. replace SOAP-HLA and Kourami with OptiType
 2. the version of each tool is listed as follows:
 		
-		Trimmomatic 0.39
-		bwa 0.7.17
-		samtools 1.13   
-		GATK 4.2.0.0
-		VEP 104  
-		hisat2 2.2.1 
-		stringtie 2.1.6
-		OptiType 1.3.5
-		STAR 2.7
-		arriba 1.1.0
-		DeepHLApan 1.1
+Trimmomatic 0.39
+bwa 0.7.17
+samtools 1.13   
+GATK 4.2.0.0
+VEP 104  
+hisat2 2.2.1 
+stringtie 2.1.6
+OptiType 1.3.5
+STAR 2.7
+arriba 1.1.0
+DeepHLApan 1.1
 
 ### v2.0
 2019.09
