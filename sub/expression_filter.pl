@@ -3,7 +3,7 @@
 # Version: TSNAD v2.1
 # File: expression_filter.pl
 # Perl Version: 5.26.1
-# Finish time: July, 2021.
+# Latest time: July, 2021.
 # Developer: Jingcheng Wu, Zhan Zhou, Wenyi Zhao 
 # Copyright (C) 2016-2021 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
