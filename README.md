@@ -79,6 +79,10 @@ TSNAD uses the following software and libraries:
 		tar -xjvf bwa-*.tar.bz2
 		cd bwa-*
 		make
+		
+		vim ~/.bashrc
+		export PATH=$PATH:/home/tsnad/Tools/bwa-0.7.17/
+		source ~/.bashrc
 
 3. samtools
 	
