@@ -3,9 +3,9 @@
 # Version: TSNAD v2.0
 # File: TSNAD.py
 # Python Version: 2.7.11
-# Finish time: Sep, 2019.
+# Finish time: July, 2021.
 # Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren
-# Copyright (C) 2016-2019 - College of Pharmaceutical Sciences, 
+# Copyright (C) 2016-2021 - College of Pharmaceutical Sciences, 
 #               Zhejiang University - All Rights Reserved 
 # *************************************************************
 
@@ -43,11 +43,10 @@ print "inputs_folder: %s"%opt.input
 print "outputs_folder: %s"%opt.output
 print "RNA_seq_folder: %s"%opt.rna_seq
 print "trimmomatic_tool: %s"%hash_table['trimmomatic_tool']
+print "Optitype_folder: %s"%hash_table['Optitype_folder']
 print "bwa_folder:",hash_table['bwa_folder']
 print "samtools_folder: %s"%hash_table['samtools_folder']
 print "gatk_tool: %s"%hash_table['gatk_tool']
-print "soaphla_folder: %s"%hash_table['soaphla_folder']
-print "kourami_folder: %s"%hash_table['kourami_folder']
 print "star_folder: %s"%hash_table['star_folder']
 print "arriba_folder: %s"%hash_table['arriba_folder']
 
@@ -79,14 +78,13 @@ inputs_folder = opt.input
 outputs_folder = opt.output
 RNA_seq_folder = opt.rna_seq
 trimmomatic_tool = hash_table['trimmomatic_tool']
+Optitype_folder = hash_table['Optitype_folder']
 bwa_folder = hash_table['bwa_folder']
 samtools_folder = hash_table['samtools_folder']
 gatk_tool = hash_table['gatk_tool']
 hisat2_folder = hash_table['hisat2_folder']
 stringtie_tool = hash_table['stringtie_tool']
 VEP_folder = hash_table['VEP_folder']
-soaphla_folder = hash_table['soaphla_folder']
-kourami_folder = hash_table['kourami_folder']
 star_folder = hash_table['star_folder']
 arriba_folder = hash_table['arriba_folder']
 
@@ -131,21 +129,15 @@ else:
     
 # Reading the folder where project locates
 print "All results will be stored in folder %s"%outputs_folder;
-if 'grch37' in version_of_hg:
-    if RNA_seq_folder:
-        folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","soaphla_results","star_results","arriba_results","hisat2_results","deephlapan_results"];
-    else:
-        folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","soaphla_results","deephlapan_results"];
-if 'grch38' in version_of_hg:
-    if RNA_seq_folder:
-        folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","kourami_results","star_results","arriba_results","hisat2_results","deephlapan_results"];
-    else:
-        folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","kourami_results","deephlapan_results"];
+if RNA_seq_folder:
+    folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","Optitype_results","star_results","arriba_results","hisat2_results","deephlapan_results"];
+else:
+    folder_name = ["trimmomatic_results","bwa_results","samtools_results","gatk_results","mutect2_results","vep_results","Optitype_results","deephlapan_results"];
 
 
 # define all the folder names we may use
 for s in folder_name:
-    new_path = outputs_folder + s;
+    new_path = outputs_folder + "/" + s;
     if os.path.exists(new_path): # if the folder has existed, do nothing
         print " Notes: %s has already existed"%new_path;
         continue;
@@ -153,7 +145,8 @@ for s in folder_name:
         os.mkdir(new_path); # generate the folders of intermediate results
 
 fileList = subfunction.getFileList(inputs_folder,"fastq.gz");
-
+outputCleanedFile=['/home/tsnad/tesla/TESLA_1/grch38_results/trimmomatic_results/normal_1_clean.fastq','/home/tsnad/tesla/TESLA_1/grch38_results/trimmomatic_results/normal_2_clean.fastq','/home/tsnad/tesla/TESLA_1/grch38_results/trimmomatic_results/tumor_1_clean.fastq','/home/tsnad/tesla/TESLA_1/grch38_results/trimmomatic_results/tumor_2_clean.fastq'];
+'''
 # Starting the tools
 print "\n\n"
 print "*************************************************************************************************************************************"
@@ -163,38 +156,35 @@ outputCleanedFile = subfunction.runTrimmomatic(trimmomatic_tool,outputs_folder,f
 print "So far the 1st procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
-print "*** Beginning the 2nd procedure: BWA mapping to genome reference sequence...\n"
-outputSamFiles = subfunction.runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,outputCleanedFile,typeNum,laneNum,partNum,threadNum,version_of_hg);
+print "*** Beginning the 2nd procedure: HLA typing...\n"
+subfunction.runOptitype(Optitype_folder,outputs_folder,outputCleanedFile,typeNum);
+#subfunction.runOptitype(Optitype_folder,outputs_folder,['/home/tsnad/data/file/test/trimmomatic_results/normal_1_clean.fastq','/home/tsnad/data/file/test/trimmomatic_results/normal_1_unpaired.fastq','/home/tsnad/data/file/test/trimmomatic_results/normal_2_clean.fastq','/home/tsnad/data/file/test/trimmomatic_results/normal_2_unpaired.fastq','/home/tsnad/data/file/test/trimmomatic_results/tumor_1_clean.fastq','/home/tsnad/data/file/test/trimmomatic_results/tumor_1_unpaired.fastq','/home/tsnad/data/file/test/trimmomatic_results/tumor_2_clean.fastq','/home/tsnad/data/file/test/trimmomatic_results/tumor_2_unpaired.fastq'],typeNum);
 print "So far the 2nd procedure done.\n\n"
-
+'''
 print "*************************************************************************************************************************************"
-print "*** Beginning the 3rd procedure: Samtools to rearrange the sequence...\n"
-outputIndFiles = subfunction.runSAM(samtools_folder,gatk_tool,outputs_folder,outputSamFiles,typeNum,laneNum,threadNum);
+print "*** Beginning the 3rd procedure: BWA mapping to genome reference sequence...\n"
+outputSamFiles = subfunction.runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,outputCleanedFile,typeNum,laneNum,partNum,threadNum,version_of_hg);
 print "So far the 3rd procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
-print "*** Beginning the 4th procedure: GATK local realignment around indels...\n"
-outputRecalBamFiles = subfunction.runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,outputIndFiles,typeNum,needRevisedData);
+print "*** Beginning the 4th procedure: Samtools to rearrange the sequence...\n"
+outputIndFiles = subfunction.runSAM(samtools_folder,gatk_tool,outputs_folder,outputSamFiles,typeNum,laneNum,threadNum);
 print "So far the 4th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
-print "*** Beginning the 5th procedure: MuTect to detect somatic mutation...\n"
-outputMutectVcfFiles = subfunction.runMUTECT2(gatk_tool,ref_folder,outputs_folder,outputRecalBamFiles,typeNum,tumor_reads,normal_reads,tumor_f,normal_f,tumor_alt);
+print "*** Beginning the 5th procedure: GATK local realignment around indels...\n"
+outputRecalBamFiles = subfunction.runGATK(samtools_folder,gatk_tool,ref_folder,outputs_folder,outputIndFiles,typeNum,needRevisedData);
 print "So far the 5th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
-print "*** Beginning the 6th procedure: VEP annotation...\n"
-outputVEPFiles=subfunction.runVEP(VEP_folder,outputs_folder,outputMutectVcfFiles,version_of_hg);
+print "*** Beginning the 6th procedure: MuTect to detect somatic mutation...\n"
+outputMutectVcfFiles = subfunction.runMUTECT2(gatk_tool,ref_folder,outputs_folder,outputRecalBamFiles,typeNum,tumor_reads,normal_reads,tumor_f,normal_f,tumor_alt);
 print "So far the 6th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
-print "*** Beginning the 7th procedure: HLA typing...\n"
-if 'grch37' in version_of_hg:
-    subfunction.runHLA(soaphla_folder,outputs_folder,outputRecalBamFiles,typeNum);
-if 'grch38' in version_of_hg:
-    subfunction.runkourami(kourami_folder,outputRecalBamFiles,typeNum);
+print "*** Beginning the 7th procedure: VEP annotation...\n"
+outputVEPFiles=subfunction.runVEP(VEP_folder,outputs_folder,outputMutectVcfFiles,version_of_hg);
 print "So far the 7th procedure done.\n\n"
-
 
 if RNA_seq_folder:
     print "*************************************************************************************************************************************"
