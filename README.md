@@ -3,8 +3,8 @@
  An integrated pipeline for neoantigen prediction from WGS or WES.    
    
  Authors: Zhan Zhou, Jingcheng Wu, Xingzheng Lyu, Jianan Ren  
- Date: Sep 2019  
- Version: 2.0  
+ Date: July 2021  
+ Version: 2.1  
  License: TSNAD is released under GNU license  
  System: Linux  
  Contact: zhanzhou@zju.edu.cn
@@ -52,21 +52,20 @@ All results would be stored in the folder results/, and the final results of neo
 #### Requirements
 TSNAD uses the following software and libraries:  
   	
-1. Trimmomatic  (In Tools/)  
-2. bwa  (In Tools/)  
-3. samtools  (In Tools/)     
-4. [GATK](https://github.com/broadinstitute/gatk/releases/download/4.0.11.0/gatk-4.0.11.0.zip)   
-5. [VEP](https://github.com/Ensembl/ensembl-vep/archive/release/96.zip)   
-6. [hisat2](http://ccb.jhu.edu/software/hisat2/dl/hisat2-2.1.0-Linux_x86_64.zip)   
-7. stringtie  (In Tools/)
-8. SOAP-HLA (for grch37, in Tools/)
-9. kourami  (for grch38, in Tools/)
-10. STAR (In Tools/)
-11. arriba (In Tools/)
-12. deephlapan 
-13. JAVA     
-14. Python    
-15. Perl   
+1. Trimmomatic 0.39 (In Tools/)  
+2. bwa 0.7.17 (In Tools/)  
+3. samtools 1.13 (In Tools/)     
+4. [GATK 4.2.0.0](https://github.com/broadinstitute/gatk/releases/download/4.2.0.0/gatk-4.2.0.0.zip) 
+5. [VEP 104](https://github.com/Ensembl/ensembl-vep/archive/refs/tags/release/104.3.zip)   
+6. [hisat2 2.2.1](https://cloud.biohpc.swmed.edu/index.php/s/oTtGWbWjaxsQ2Ho/download)   
+7. stringtie 2.1.6 (In Tools/)
+8. OptiType 1.3.5 (In Tools/)
+10. STAR 2.7 (In Tools/)
+11. arriba 1.1.0 (In Tools/)
+12. DeepHLApan 1.1 (In Tools/)
+13. JAVA 1.8    
+14. Python 2.7   
+15. Perl 5.22  
   
 1-12 tools are better put in the folder Tools/.   
 
@@ -138,7 +137,7 @@ TSNAD uses the following software and libraries:
 		cd ensembl-vep-release-*
 		perl INSTALL.pl
 	
-	download the API, download the cache *homo_sapiens_merged_vep_96_GRCh37.tar.gz* for grch37, download the cache *homo_sapiens_merged_vep_96_GRCh38.tar.gz* for grch38.
+	download the API, download the cache *homo_sapiens_merged_vep_104_GRCh37.tar.gz* for grch37, download the cache *homo_sapiens_merged_vep_104_GRCh38.tar.gz* for grch38.
 	
 	if it is not help, try following step:
 		
@@ -155,6 +154,8 @@ TSNAD uses the following software and libraries:
 		PERL5LIB=${PERL5LIB}:${HOME}/src/ensembl-compara/modules
 		PERL5LIB=${PERL5LIB}:${HOME}/src/ensembl-variation/modules
 		PERL5LIB=${PERL5LIB}:${HOME}/src/ensembl-funcgen/modules
+		PERL5LIB=${PERL5LIB}:${HOME}/src/ensembl-io/modules
+		PERL5LIB=${PERL5LIB}:${HOME}/src/ensembl-tools
 		export PERL5LIB
 		
 		sudo perl -MCPAN -e shell
@@ -167,34 +168,44 @@ TSNAD uses the following software and libraries:
 		cd hisat2-*
 		
 		The necessary files for grch37
-		wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch37.tar.gz 
-		wget ftp://ftp.ensembl.org/pub/grch37/release-96/gtf/homo_sapiens/Homo_sapiens.GRCh37.87.gtf.gz
-		tar -xvf grch37.tar.gz
+		wget https://genome-idx.s3.amazonaws.com/hisat/grch37_genome.tar.gz
+		wget http://ftp.ensembl.org/pub/grch37/release-104/gtf/homo_sapiens/Homo_sapiens.GRCh37.87.gtf.gz
+		tar -zxvf grch37_genome.tar.gz
 		gunzip Homo_sapiens.GRCh37.87.gtf.gz -d
 		
 		The necessary files for grch38
-		wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/data/grch38.tar.gz
-		wget ftp://ftp.ensembl.org/pub/release-96/gtf/homo_sapiens/Homo_sapiens.GRCh38.96.gtf.gz
-		tar -xvf grch38.tar.gz
-		gunzip Homo_sapiens.GRCh38.96.gtf.gz -d
+		wget https://genome-idx.s3.amazonaws.com/hisat/grch38_genome.tar.gz
+		wget http://ftp.ensembl.org/pub/release-104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf.gz
+		tar -zxvf grch38_genome.tar.gz
+		gunzip Homo_sapiens.GRCh38.104.gtf.gz -d
 
 7. stringtie
 
-		tar -xvf stringtie-*.tar.gz
+		tar -zxvf stringtie-*.tar.gz
 
-8. SOAP-HLA
-	
-		unzip SOAP-HLA.zip
+8. OptiType
+
+		unzip OptiType.zip
 		
-9. kourami (mvn and bamUtil is needed)
+		cd OptiType/glpk-5.0
+		./configure
+		make && make install
 		
-		cd kourami*
-		mvn install
-		scripts/download_panel.sh
-		scripts/download_grch38.sh hs38DH
-		scripts/download_grch38.sh hs38NoAltDH
-		bwa index resources/hs38DH.fa
-		bwa index resources/hs38NoAltDH.fa
+		cd ../OptiType/hdf5-1.12.1
+		./configure
+		make && make install
+		
+		vim /etc/ld.so.conf
+		/usr/local/lib
+		/sbin/ldconfig -v
+		
+		pip install numpy
+		pip install pyomo
+		pip install pysam
+		pip install matplotlib
+		pip install tables
+		pip install pandas
+		pip install future
 
 10. STAR
 		
@@ -223,21 +234,20 @@ TSNAD uses the following software and libraries:
 
 1. configure the file in the directory */config*, take grch38 as example:
 
-		trimmomatic_tool /home/tsnad/Tools/Trimmomatic-0.38/trimmomatic-0.38.jar
+		trimmomatic_tool /home/tsnad/Tools/Trimmomatic-0.39/trimmomatic-0.39.jar
 		bwa_folder /home/tsnad/Tools/bwa-0.7.17/
-		samtools_folder /home/tsnad/Tools/samtools-1.9/
-		gatk_tool /home/tsnad/Tools/gatk-4.0.11.0/gatk-package-4.0.11.0-local.jar
+		samtools_folder /home/tsnad/Tools/samtools-1.13/
+		gatk_tool /home/tsnad/Tools/gatk-4.2.0.0/gatk-package-4.2.0.0-local.jar
 		VEP_folder /home/tsnad/Tools/ensembl-vep/
 		hisat2_folder /home/tsnad/Tools/hisat2-2.1.0/
 		stringtie_tool /home/tsnad/Tools/hisat2-2.1.0/stringtie-1.3.5.Linux_x86_64/stringtie
-		soaphla_folder /home/tsnad/Tools/SOAP-HLA/
-		kourami_folder  /home/tsnad/Tools/kourami-master/
-		star_folder     /home/tsnad/Tools/STAR/
-		arriba_folder     /home/tsnad/Tools/arriba_v1.1.0/
-		ref_human_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/Homo_sapiens_assembly38.fasta
-		ref_1000G_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/1000G_phase1.snps.high_confidence.hg38.vcf
-		ref_Mills_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf
-		ref_dbsnp_file /home/tsnad/Tools/gatk-4.0.11.0/hg38/dbsnp_144.hg38_adj.vcf
+		Optitype_folder /home/tsnad/Tools/OptiType/
+		star_folder	/home/tsnad/Tools/STAR/
+		arriba_folder /home/tsnad/Tools/arriba_v1.1.0/
+		ref_human_file /home/tsnad/Tools/gatk-4.2.0.0/grch38/Homo_sapiens_assembly38.fasta
+		ref_1000G_file /home/tsnad/Tools/gatk-4.2.0.0/grch38/1000G_phase1.snps.high_confidence.hg38.vcf
+		ref_Mills_file /home/tsnad/Tools/gatk-4.2.0.0/grch38/Mills_and_1000G_gold_standard.indels.hg38.vcf
+		ref_dbsnp_file /home/tsnad/Tools/gatk-4.2.0.0/grch38/dbsnp_144.hg38_adj.vcf
 		headcrop 10
 		leading 3
 		minlen 35
@@ -292,6 +302,24 @@ The samples could be downloaded from following links:
 [rna_L1_R2.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VTSVBWdTNQa2ZwRW9wbGR1LVN6dTU4Qmowb1QxVTNJLU16YV9KOEtvb3FyOGc/ZT1uc0Y1N2g=.fastq.gz)   
 
 ## Update log
+
+### v2.1
+2021.07
+1. replace SOAP-HLA and Kourami to OptiType
+2. the version of each tool is listed as follows:
+		
+		Trimmomatic 0.39
+		bwa 0.7.17
+		samtools 1.13   
+		GATK 4.2.0.0
+		VEP 104  
+		hisat2 2.2.1 
+		stringtie 2.1.6
+		OptiType 1.3.5
+		STAR 2.7
+		arriba 1.1.0
+		DeepHLApan 1.1
+
 ### v2.0
 2019.09
 1. provide the neoantigen prediction from indel and gene fusion
