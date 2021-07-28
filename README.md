@@ -207,7 +207,7 @@ TSNAD uses the following software and libraries:
 		pip install pandas
 		pip install future
 
-10. STAR
+9. STAR
 		
 		unzip STAR-master.zip
 		cd STAR-master/source
@@ -219,12 +219,12 @@ TSNAD uses the following software and libraries:
 		The necessary files for grch38
 		wget  ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.annotation.gtf.gz
 
-11. Arriba
+10. Arriba
 
 		tar -xvf arriba_v1.1.0.tar.gz
 		cd arriba_v1.1.0 && make
 
-12.DeepHLApan
+11. DeepHLApan
 
 		unzip deephlapan.zip
 		cd deephlapan
