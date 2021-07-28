@@ -189,7 +189,7 @@ TSNAD uses the following software and libraries:
 
 8. OptiType
 
-		unzip OptiType.zip
+		unzip OptiType.zip -d OptiType
 		
 		cd OptiType/glpk-5.0
 		./configure
