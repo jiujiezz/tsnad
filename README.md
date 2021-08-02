@@ -27,7 +27,7 @@ First, you need to install docker (https://docs.docker.com/)
 
 then, type the following code to install TSNAD:
 
-	docker pull biopharm/tsnad:v2.0
+	docker pull biopharm/tsnad:v2.1.4
 
 it may take several hours to download because of the large size.
 
@@ -35,7 +35,7 @@ it may take several hours to download because of the large size.
 
 You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to provide): 
 	
-	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results biopharm/tsnad:v2.0 /bin/bash	
+	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results biopharm/tsnad:v2.1.4 /bin/bash	
 	
 type the following command then the prediction of neoantigen from WES/WGS would start:
 
@@ -45,7 +45,7 @@ type the following command then the prediction of neoantigen from WES/WGS would 
 	
 	python TSNAD.py -I samples/ -R RNA-seq/ -V [grch37/grch38] -O results/
 
-All results would be stored in the folder results/, and the final results of neoantigen are stored in the results/deephlapan_results/
+All results would be stored in the folder results/, and the final results of neoantigen are stored in the results/deephlapan_results/. 
 
 ### Installed by github
 
@@ -305,6 +305,8 @@ The samples could be downloaded from following links:
 [rna_L1_R1.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VWX0w4ODFXb2tCSmtpRTZLOXNIcm1RQkg1Y1VjenpBYUdIWHhKd3BhQjZXZ0E/ZT1POFpBMG4=.fastq.gz)   
 [rna_L1_R2.fastq.gz](https://onedrive.gimhoy.com/sharepoint/aHR0cHM6Ly96anVlZHVjbi1teS5zaGFyZXBvaW50LmNvbS86dTovZy9wZXJzb25hbC9iaW9waGFybV96anVfZWR1X2NuL0VTSVBWdTNQa2ZwRW9wbGR1LVN6dTU4Qmowb1QxVTNJLU16YV9KOEtvb3FyOGc/ZT1uc0Y1N2g=.fastq.gz)   
 
+To generate useable neoantigen predictions, the minimum depth should be 15X for WGS and 50X for WES, the recommended depth should be 30X for WGS and 100X for WES. For sample with WES tumor/normal data and RNA-seq data, it takes about 50 hours to finish neoantigen prediction in the Ubuntu system with 64G memory and 512G hard disk space.
+
 ## Update log
 
 ### v2.1
@@ -312,17 +314,17 @@ The samples could be downloaded from following links:
 1. replace SOAP-HLA and Kourami with OptiType
 2. the version of each tool is listed as follows:
 		
-Trimmomatic 0.39
-bwa 0.7.17
-samtools 1.13   
-GATK 4.2.0.0
-VEP 104  
-hisat2 2.2.1 
-stringtie 2.1.6
-OptiType 1.3.5
-STAR 2.7
-arriba 1.1.0
-DeepHLApan 1.1
+		Trimmomatic 0.39
+		bwa 0.7.17
+		samtools 1.13   
+		GATK 4.2.0.0
+		VEP 104  
+		hisat2 2.2.1 
+		stringtie 2.1.6
+		OptiType 1.3.5
+		STAR 2.7
+		arriba 1.1.0
+		DeepHLApan 1.1
 
 ### v2.0
 2019.09

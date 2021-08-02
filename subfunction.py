@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
-# Version: TSNAD v2.0
+# Version: TSNAD v2.1
 # File: subfunction.py
 # Python Version: 2.7.11
 # Finish time: July, 2021.
@@ -303,7 +303,7 @@ def runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,output
 	
 # Gene fusions analysis 
 ## When installing STAR, index folder should be created under "star_folder": mkdir star_folder/index; gencode.v19.annotation.gtf and gencode.v28.annotation.gtf should be downloaded under "star_folder": wget  ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.annotation.gtf.gz
-def runarriba(RNA_seq_folder,star_folder,arriba_folder,kourami_folder,outputs_folder,threadNum,version_of_hg):
+def runarriba(RNA_seq_folder,star_folder,arriba_folder,outputs_folder,threadNum,version_of_hg):
     current_path = sys.path[0];
     inputFile = getFileList(RNA_seq_folder,'fastq.gz')
     p,f = os.path.split(inputFile[0]);
@@ -313,9 +313,9 @@ def runarriba(RNA_seq_folder,star_folder,arriba_folder,kourami_folder,outputs_fo
         command2 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --genomeDir ' + star_folder + 'index_b37/ --genomeLoad NoSharedMemory --readFilesIn ' + inputFile[0] + ' ' + inputFile[1] + ' --readFilesCommand zcat --outFileNamePrefix ' + outputs_folder + 'star_results/' + file_name + ' --outSAMtype BAM Unsorted --outSAMunmapped Within --outBAMcompression 0 --outFilterMultimapNmax 1 --outFilterMismatchNmax 3 --chimSegmentMin 10 --chimOutType WithinBAM SoftClip --chimJunctionOverhangMin 10 --chimScoreMin 1 --chimScoreDropMax 30 --chimScoreJunctionNonGTAG 0 --chimScoreSeparation 1 --alignSJstitchMismatchNmax 5 -1 5 5 --chimSegmentReadGapMax 3'
         command3 = arriba_folder + 'arriba -x ' + outputs_folder + 'star_results/' + file_name + 'Aligned.out.bam -o ' +outputs_folder + 'arriba_results/' + file_name + '.tsv -a ' + arriba_folder + 'database/GRCh37.p13.genome.fa'  + ' -g' + star_folder + 'gencode.v19.annotation.gtf -b ' + arriba_folder + 'database/blacklist_hg19_hs37d5_GRCh37_2018-11-04.tsv.gz -T -P'
     if 'grch38' in version_of_hg:
-        command1 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --runMode genomeGenerate --genomeDir ' + star_folder + 'index_hg38/ --genomeFastaFiles ' + kourami_folder + 'resources/hs38NoAltDH.fa' + ' --sjdbGTFfile ' + star_folder + 'gencode.v28.annotation.gtf --sjdbOverhang 100'
+        command1 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --runMode genomeGenerate --genomeDir ' + star_folder + 'index_hg38/ --genomeFastaFiles ' + arriba_folder + 'database/hs38NoAltDH.fa' + ' --sjdbGTFfile ' + star_folder + 'gencode.v28.annotation.gtf --sjdbOverhang 100'
         command2 = star_folder + 'bin/Linux_x86_64/STAR --runThreadN ' + str(threadNum) + ' --genomeDir ' + star_folder+ 'index_hg38/ --genomeLoad NoSharedMemory --readFilesIn ' + inputFile[0] + ' ' + inputFile[1] + ' --readFilesCommand zcat --outFileNamePrefix ' + outputs_folder + 'star_results/' + file_name + ' --outSAMtype BAM Unsorted --outSAMunmapped Within --outBAMcompression 0 --outFilterMultimapNmax 1 --outFilterMismatchNmax 3 --chimSegmentMin 10 --chimOutType WithinBAM SoftClip --chimJunctionOverhangMin 10 --chimScoreMin 1 --chimScoreDropMax 30 --chimScoreJunctionNonGTAG 0 --chimScoreSeparation 1 --alignSJstitchMismatchNmax 5 -1 5 5 --chimSegmentReadGapMax 3'
-        command3 = arriba_folder + 'arriba -x ' + outputs_folder + 'star_results/' + file_name + 'Aligned.out.bam -o ' + outputs_folder + 'arriba_results/' + file_name + '.tsv -a ' + kourami_folder + 'resources/hs38NoAltDH.fa' + ' -g ' + star_folder + 'gencode.v28.annotation.gtf -b ' + arriba_folder + 'database/blacklist_hg38_GRCh38_2018-11-04.tsv.gz -T -P'
+        command3 = arriba_folder + 'arriba -x ' + outputs_folder + 'star_results/' + file_name + 'Aligned.out.bam -o ' + outputs_folder + 'arriba_results/' + file_name + '.tsv -a ' + arriba_folder + 'database/hs38NoAltDH.fa' + ' -g ' + star_folder + 'gencode.v28.annotation.gtf -b ' + arriba_folder + 'database/blacklist_hg38_GRCh38_2018-11-04.tsv.gz -T -P'
     print command1
     print command2
     print command3
@@ -335,19 +335,19 @@ def runneoantigen(RNA_seq_folder,outputVEPFiles,outputs_folder,version_of_hg):
             inputFile = getFileList(RNA_seq_folder,'fastq.gz')
             p1,f1 = os.path.split(inputFile[0]);
             file_name2 = f1.split("_")[0];
-            command='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan.pl ' + outputs_folder + 'vep_results/' + file_name + '_with_expression_' + version_of_hg + '.txt ' + outputs_folder + file_name1 + '_outmembrane_mutation.txt '+  outputs_folder + file_name1 + '_outmembrane_mutation_with_property_change.txt '+ outputs_folder + 'deephlapan_results/'+ file_name1 + '.csv '+ current_path +'/sub/tmhmm_membrane_proteins.txt ' + current_path +'/sub/aminoacid.txt ' + outputs_folder +'soaphla_results/' + file_name1 + '/' + file_name1 + '.type ' +version_of_hg+ ' ' + current_path
-            command1='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan_fusion.pl ' + outputs_folder + 'arriba_results/' + file_name2 + '.tsv ' + outputs_folder + 'deephlapan_results/'+ file_name1 + '_fusion.csv ' + outputs_folder +'soaphla_results/' + file_name1 + '/' + file_name1 + '.type '
+            command='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan.pl ' + outputs_folder + 'vep_results/' + file_name + '_with_expression_' + version_of_hg + '.txt ' + outputs_folder + file_name1 + '_outmembrane_mutation.txt '+  outputs_folder + file_name1 + '_outmembrane_mutation_with_property_change.txt '+ outputs_folder + 'deephlapan_results/'+ file_name1 + '.csv '+ current_path +'/sub/tmhmm_membrane_proteins.txt ' + current_path +'/sub/aminoacid.txt ' + outputs_folder +'/Optitype_results/' +file_name1 + '_result.tsv ' +version_of_hg+ ' ' + current_path
+            command1='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan_fusion.pl ' + outputs_folder + 'arriba_results/' + file_name2 + '.tsv ' + outputs_folder + 'deephlapan_results/'+ file_name1 + '_fusion.csv ' + outputs_folder +'/Optitype_results/' +file_name1 + '_result.tsv '
         else:
-            command='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan.pl ' + outputs_folder + 'vep_results/' + file_name + '.txt ' + outputs_folder + file_name1 + '_outmembrane_mutation.txt '+  outputs_folder + file_name1 + '_outmembrane_mutation_with_property_change.txt ' + outputs_folder + 'deephlapan_results/'+ file_name1 + '.csv ' + current_path +'/sub/tmhmm_membrane_proteins.txt ' + current_path +'/sub/aminoacid.txt ' + outputs_folder +'soaphla_results/' +file_name1 + '/' + file_name1 + '.type ' +version_of_hg+ ' ' + current_path
+            command='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan.pl ' + outputs_folder + 'vep_results/' + file_name + '.txt ' + outputs_folder + file_name1 + '_outmembrane_mutation.txt '+  outputs_folder + file_name1 + '_outmembrane_mutation_with_property_change.txt ' + outputs_folder + 'deephlapan_results/'+ file_name1 + '.csv ' + current_path +'/sub/tmhmm_membrane_proteins.txt ' + current_path +'/sub/aminoacid.txt ' + outputs_folder +'/Optitype_results/' +file_name1 + '_result.tsv ' +version_of_hg+ ' ' + current_path
     elif 'grch38' in version_of_hg:
         if RNA_seq_folder:
             inputFile = getFileList(RNA_seq_folder,'fastq.gz')
             p1,f1 = os.path.split(inputFile[0]);
             file_name2 = f1.split("_")[0];
-            command='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan.pl ' + outputs_folder + 'vep_results/' + file_name + '_with_expression_' + version_of_hg + '.txt '+ outputs_folder + file_name1 + '_outmembrane_mutation.txt '+  outputs_folder + file_name1 + '_outmembrane_mutation_with_property_change.txt ' +outputs_folder + 'deephlapan_results/'+ file_name1 + '.csv ' + current_path +'/sub/tmhmm_membrane_proteins.txt ' + current_path +'/sub/aminoacid.txt ' + outputs_folder +'kourami_results/' + file_name1 + '.result ' +version_of_hg+ ' ' + current_path
-            command1='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan_fusion.pl ' + outputs_folder + 'arriba_results/' + file_name2 + '.tsv ' + outputs_folder + 'deephlapan_results/'+ file_name1 + '_fusion.csv ' + outputs_folder +'kourami_results/' +file_name1 + '.result '
+            command='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan.pl ' + outputs_folder + 'vep_results/' + file_name + '_with_expression_' + version_of_hg + '.txt '+ outputs_folder + file_name1 + '_outmembrane_mutation.txt '+  outputs_folder + file_name1 + '_outmembrane_mutation_with_property_change.txt ' +outputs_folder + 'deephlapan_results/'+ file_name1 + '.csv ' + current_path +'/sub/tmhmm_membrane_proteins.txt ' + current_path +'/sub/aminoacid.txt ' + outputs_folder +'/Optitype_results/' + file_name1 + '_result.tsv ' +version_of_hg+ ' ' + current_path
+            command1='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan_fusion.pl ' + outputs_folder + 'arriba_results/' + file_name2 + '.tsv ' + outputs_folder + 'deephlapan_results/'+ file_name1 + '_fusion.csv ' + outputs_folder +'/Optitype_results/' +file_name1 + '_result.tsv '
         else:
-            command='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan.pl ' + outputs_folder + 'vep_results/' + file_name + '.txt ' + outputs_folder + file_name1 + '_outmembrane_mutation.txt '+  outputs_folder + file_name1 + '_outmembrane_mutation_with_property_change.txt ' + outputs_folder + 'deephlapan_results/'+ file_name1 + '.csv ' + current_path +'/sub/tmhmm_membrane_proteins.txt ' + current_path +'/sub/aminoacid.txt ' + outputs_folder +'kourami_results/' +file_name1 + '.result ' +version_of_hg + ' ' + current_path
+            command='perl '+ current_path +'/sub/protein_mutation_filter_deephlapan.pl ' + outputs_folder + 'vep_results/' + file_name + '.txt ' + outputs_folder + file_name1 + '_outmembrane_mutation.txt '+  outputs_folder + file_name1 + '_outmembrane_mutation_with_property_change.txt ' + outputs_folder + 'deephlapan_results/'+ file_name1 + '.csv ' + current_path +'/sub/tmhmm_membrane_proteins.txt ' + current_path +'/sub/aminoacid.txt ' + outputs_folder +'/Optitype_results/' +file_name1 + '_result.tsv ' +version_of_hg + ' ' + current_path
     print command
     os.system(command)
     if RNA_seq_folder:

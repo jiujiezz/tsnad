@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
-# Version: TSNAD v2.0
+# Version: TSNAD v2.1
 # File: TSNAD.py
 # Python Version: 2.7.11
 # Finish time: July, 2021.
@@ -145,8 +145,7 @@ for s in folder_name:
         os.mkdir(new_path); # generate the folders of intermediate results
 
 fileList = subfunction.getFileList(inputs_folder,"fastq.gz");
-outputCleanedFile=['/home/tsnad/tesla/TESLA_1/grch38_results/trimmomatic_results/normal_1_clean.fastq','/home/tsnad/tesla/TESLA_1/grch38_results/trimmomatic_results/normal_2_clean.fastq','/home/tsnad/tesla/TESLA_1/grch38_results/trimmomatic_results/tumor_1_clean.fastq','/home/tsnad/tesla/TESLA_1/grch38_results/trimmomatic_results/tumor_2_clean.fastq'];
-'''
+
 # Starting the tools
 print "\n\n"
 print "*************************************************************************************************************************************"
@@ -158,9 +157,8 @@ print "So far the 1st procedure done.\n\n"
 print "*************************************************************************************************************************************"
 print "*** Beginning the 2nd procedure: HLA typing...\n"
 subfunction.runOptitype(Optitype_folder,outputs_folder,outputCleanedFile,typeNum);
-#subfunction.runOptitype(Optitype_folder,outputs_folder,['/home/tsnad/data/file/test/trimmomatic_results/normal_1_clean.fastq','/home/tsnad/data/file/test/trimmomatic_results/normal_1_unpaired.fastq','/home/tsnad/data/file/test/trimmomatic_results/normal_2_clean.fastq','/home/tsnad/data/file/test/trimmomatic_results/normal_2_unpaired.fastq','/home/tsnad/data/file/test/trimmomatic_results/tumor_1_clean.fastq','/home/tsnad/data/file/test/trimmomatic_results/tumor_1_unpaired.fastq','/home/tsnad/data/file/test/trimmomatic_results/tumor_2_clean.fastq','/home/tsnad/data/file/test/trimmomatic_results/tumor_2_unpaired.fastq'],typeNum);
 print "So far the 2nd procedure done.\n\n"
-'''
+
 print "*************************************************************************************************************************************"
 print "*** Beginning the 3rd procedure: BWA mapping to genome reference sequence...\n"
 outputSamFiles = subfunction.runBWA(bwa_folder,gatk_tool,ref_folder,outputs_folder,outputCleanedFile,typeNum,laneNum,partNum,threadNum,version_of_hg);
@@ -192,7 +190,7 @@ if RNA_seq_folder:
     subfunction.runhisat2(RNA_seq_folder,hisat2_folder,stringtie_tool,samtools_folder,outputs_folder,outputVEPFiles,version_of_hg);
     print "So far the 8th procedure done.\n\n"
     print "*** Beginning the 9th procedure: gene-fusion analysis...\n"
-    subfunction.runarriba(RNA_seq_folder,star_folder,arriba_folder,kourami_folder,outputs_folder,threadNum,version_of_hg)
+    subfunction.runarriba(RNA_seq_folder,star_folder,arriba_folder,outputs_folder,threadNum,version_of_hg)
     print "So far the 9th procedure done.\n\n"
 
 print "*************************************************************************************************************************************"
@@ -205,4 +203,3 @@ finish_time = datetime.datetime.now();
 print "\nEnding time is: %s"%finish_time
 print "The procedure costs time: %s"%(finish_time - start_time);
 print "\nCongratulations! This program has finished the required task so far. You can start to plan the next work now.\n"
-
