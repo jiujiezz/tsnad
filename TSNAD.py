@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # ******************** Software Information *******************
-# Version: TSNAD v2.0
+# Version: TSNAD v2.1
 # File: TSNAD.py
 # Python Version: 2.7.11
 # Finish time: July, 2021.
