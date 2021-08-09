@@ -1,3 +1,17 @@
+#!/usr/bin/python
+# ******************** Software Information *******************
+# Version: TSNAD v2.0.1
+# File: parse_args.py
+# Python Version: 2.7.11
+# Finish time: July, 2021.
+# Developer: Zhan Zhou, Xingzheng Lyu, Jingcheng Wu, Jianan Ren
+# Copyright (C) 2016-2021 - College of Pharmaceutical Sciences, 
+#               Zhejiang University - All Rights Reserved 
+# *************************************************************
+# 
+# This file define all the sub functions used in somatic_mutation_sequencing_pipeline.py
+#
+
 from optparse import OptionParser
 
 def CommandLineParser():
