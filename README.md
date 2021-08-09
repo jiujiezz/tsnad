@@ -333,12 +333,12 @@ To generate useable neoantigen predictions, the minimum depth should be 15X for 
 3. provide the docker version of TSNAD
 4. provide the web-service of TSNAD (http://biopharm.zju.edu.cn/tsnad/)
 
-### V1.0.2
+### v1.0.2
 2019.05
 1. VEP v94 -> v96
 2. Add the selection of grch38 when calling mutations.
 
-### V1.0.1
+### v1.0.1
 2018.11
 1. Trimmomatic v0.35 -> v0.38  
 2. BWA v0.7.12 -> v0.7.17  
@@ -349,7 +349,7 @@ To generate useable neoantigen predictions, the minimum depth should be 15X for 
 7. NetMHCpan v2.8 -> v4.0
 8. Add the function of RNA-seq analysis for neoantigen filter.
 
-### V1.0 
+### v1.0 
 2017.04
 1. GUI for neoantigen prediction  
 2. Two parts: one for somatic mutation detection, another for HLA-peptide binding prediction.
