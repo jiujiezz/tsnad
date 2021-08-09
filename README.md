@@ -309,7 +309,7 @@ To generate useable neoantigen predictions, the minimum depth should be 15X for 
 
 ## Update log
 
-### v2.1
+### v2.0
 2021.07
 1. replace SOAP-HLA and Kourami with OptiType
 2. the version of each tool is listed as follows:
@@ -326,7 +326,7 @@ To generate useable neoantigen predictions, the minimum depth should be 15X for 
 		arriba 1.1.0
 		DeepHLApan 1.1
 
-### v2.0
+### v2.0-1
 2019.09
 1. provide the neoantigen prediction from indel and gene fusion
 2. replace NetMHCpan with DeepHLApan
