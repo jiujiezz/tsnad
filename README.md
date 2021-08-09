@@ -4,7 +4,7 @@
    
  Authors: Zhan Zhou, Jingcheng Wu, Xingzheng Lyu, Jianan Ren  
  Date: July 2021  
- Version: 2.1  
+ Version: 2.0.1  
  License: TSNAD is released under GNU license  
  System: Linux  
  Contact: zhanzhou@zju.edu.cn
@@ -27,7 +27,7 @@ First, you need to install docker (https://docs.docker.com/)
 
 then, type the following code to install TSNAD:
 
-	docker pull biopharm/tsnad:v2.1.4
+	docker pull biopharm/tsnad:latest
 
 it may take several hours to download because of the large size.
 
@@ -35,7 +35,7 @@ it may take several hours to download because of the large size.
 
 You need to enter the TSNAD running enviromont with your path of WES/WGS/RNA-seq as the following command (RNA-seq is not necessary to provide): 
 	
-	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results biopharm/tsnad:v2.1.4 /bin/bash	
+	docker run -it -v [dir of WES/WGS]/:/home/tsnad/samples -v [dir of RNA-seq]:/home/tsnad/RNA-seq -v [output dir]:/home/tsnad/results biopharm/tsnad:latest /bin/bash	
 	
 type the following command then the prediction of neoantigen from WES/WGS would start:
 
@@ -309,7 +309,7 @@ To generate useable neoantigen predictions, the minimum depth should be 15X for 
 
 ## Update log
 
-### v2.1
+### v2.0.1
 2021.07
 1. replace SOAP-HLA and Kourami with OptiType
 2. the version of each tool is listed as follows:
@@ -333,12 +333,12 @@ To generate useable neoantigen predictions, the minimum depth should be 15X for 
 3. provide the docker version of TSNAD
 4. provide the web-service of TSNAD (http://biopharm.zju.edu.cn/tsnad/)
 
-### V1.2
+### V1.0.2
 2019.05
 1. VEP v94 -> v96
 2. Add the selection of grch38 when calling mutations.
 
-### V1.1
+### V1.0.1
 2018.11
 1. Trimmomatic v0.35 -> v0.38  
 2. BWA v0.7.12 -> v0.7.17  
