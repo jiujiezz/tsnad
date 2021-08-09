@@ -74,7 +74,7 @@ TSNAD uses the following software and libraries:
 
 		unzip Trimmomatic-*.zip
 
-2. bwa
+2. BWA
 
 		tar -xjvf bwa-*.tar.bz2
 		cd bwa-*
@@ -84,7 +84,7 @@ TSNAD uses the following software and libraries:
 		export PATH=$PATH:/home/tsnad/Tools/bwa-0.7.17/
 		source ~/.bashrc
 
-3. samtools
+3. SAMtools
 	
 		sudo apt-get install libncurses5-dev
 		sudo apt-get install libbz2-dev
@@ -166,7 +166,7 @@ TSNAD uses the following software and libraries:
 		install Bio::PrimarySeqI
 		install DBI
 		
-6. hisat2
+6. Hisat2
 
 		unzip hisat2-*.zip
 		cd hisat2-*
@@ -183,7 +183,7 @@ TSNAD uses the following software and libraries:
 		tar -zxvf grch38_genome.tar.gz
 		gunzip Homo_sapiens.GRCh38.104.gtf.gz -d
 
-7. stringtie
+7. Stringtie
 
 		tar -zxvf stringtie-*.tar.gz
 
@@ -323,7 +323,7 @@ To generate useable neoantigen predictions, the minimum depth should be 15X for 
 		Stringtie 2.1.6
 		OptiType 1.3.5
 		STAR 2.7
-		arriba 1.1.0
+		Arriba 1.1.0
 		DeepHLApan 1.1
 
 ### v2.0
