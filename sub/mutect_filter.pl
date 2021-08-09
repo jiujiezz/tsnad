@@ -1,6 +1,6 @@
 #!/usr/bin/perl-w
 # ******************** Software Information *******************
-# Version: TSNAD v2.1
+# Version: TSNAD v2.0.1
 # File: mutect_filter.pl
 # Perl Version: 5.26.1
 # Latest time: July, 2021.
