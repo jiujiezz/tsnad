@@ -53,15 +53,15 @@ All results would be stored in the folder results/, and the final results of neo
 TSNAD uses the following software and libraries:  
   	
 1. Trimmomatic 0.39 (In Tools/)  
-2. bwa 0.7.17 (In Tools/)  
-3. samtools 1.13 (In Tools/)     
+2. BWA 0.7.17 (In Tools/)  
+3. SAMtools 1.13 (In Tools/)     
 4. [GATK 4.2.0.0](https://github.com/broadinstitute/gatk/releases/download/4.2.0.0/gatk-4.2.0.0.zip) 
 5. [VEP 104](https://github.com/Ensembl/ensembl-vep/archive/refs/tags/release/104.3.zip)   
 6. [hisat2 2.2.1](https://cloud.biohpc.swmed.edu/index.php/s/oTtGWbWjaxsQ2Ho/download)   
-7. stringtie 2.1.6 (In Tools/)
+7. Stringtie 2.1.6 (In Tools/)
 8. OptiType 1.3.5 (In Tools/)
 9. STAR 2.7 (In Tools/)
-10. arriba 1.1.0 (In Tools/)
+10. Arriba 1.1.0 (In Tools/)
 11. DeepHLApan 1.1 (In Tools/)
 12. JAVA 1.8    
 13. Python 2.7   
@@ -315,34 +315,34 @@ To generate useable neoantigen predictions, the minimum depth should be 15X for 
 2. the version of each tool is listed as follows:
 		
 		Trimmomatic 0.39
-		bwa 0.7.17
-		samtools 1.13   
+		BWA 0.7.17
+		SAMtools 1.13   
 		GATK 4.2.0.0
 		VEP 104  
-		hisat2 2.2.1 
-		stringtie 2.1.6
+		Hisat2 2.2.1 
+		Stringtie 2.1.6
 		OptiType 1.3.5
 		STAR 2.7
 		arriba 1.1.0
 		DeepHLApan 1.1
 
-### v2.0-1
+### v2.0
 2019.09
 1. provide the neoantigen prediction from indel and gene fusion
 2. replace NetMHCpan with DeepHLApan
 3. provide the docker version of TSNAD
 4. provide the web-service of TSNAD (http://biopharm.zju.edu.cn/tsnad/)
 
-### v1.0.2
+### v1.2
 2019.05
 1. VEP v94 -> v96
 2. Add the selection of grch38 when calling mutations.
 
-### v1.0.1
+### v1.1
 2018.11
 1. Trimmomatic v0.35 -> v0.38  
 2. BWA v0.7.12 -> v0.7.17  
-3. Samtools v1.3 -> v1.9  
+3. SAMtools v1.3 -> v1.9  
 4. Picard v1.140 -> embedded in GATK 
 5. GATK v3.5 -> v4.0.11.0  
 6. Annovar -> VEP v94  
