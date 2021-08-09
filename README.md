@@ -4,7 +4,7 @@
    
  Authors: Zhan Zhou, Jingcheng Wu, Xingzheng Lyu, Jianan Ren  
  Date: July 2021  
- Version: 2.1  
+ Version: 2.0  
  License: TSNAD is released under GNU license  
  System: Linux  
  Contact: zhanzhou@zju.edu.cn
